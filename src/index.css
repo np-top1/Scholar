@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Manrope:wght@400;600;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-headline: "Noto Serif", serif;
+  --font-body: "Manrope", sans-serif;
+  --font-label: "Manrope", sans-serif;
+
+  --color-primary: #002045;
+  --color-primary-container: #1a365d;
+  --color-secondary: #775a19;
+  --color-secondary-container: #fed488;
+  --color-background: #fcf9f2;
+  --color-surface: #fcf9f2;
+  --color-surface-container: #f1eee7;
+  --color-surface-container-low: #f6f3ec;
+  --color-surface-container-high: #ebe8e1;
+  --color-surface-container-highest: #e5e2db;
+  --color-on-background: #1c1c18;
+  --color-on-surface: #1c1c18;
+  --color-on-surface-variant: #43474e;
+  --color-outline-variant: #c4c6cf;
+  --color-error: #ba1a1a;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-on-background font-body antialiased;
+  }
+
+  .hebrew-text {
+    direction: rtl;
+    @apply font-headline;
+  }
+
+  .parchment-texture {
+    background-image: url("https://www.transparenttextures.com/patterns/paper-fibers.png");
+    background-repeat: repeat;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-outline-variant/30 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-outline-variant/50;
+}

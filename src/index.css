@@ -7,35 +7,47 @@
   --font-label: "Manrope", sans-serif;
 
   --color-primary: #002045;
-  --color-primary-container: #1a365d;
+  --color-primary-variant: #1a365d;
   --color-secondary: #775a19;
-  --color-secondary-container: #fed488;
-  --color-background: #fcf9f2;
+  --color-secondary-variant: #5d4201;
+  
   --color-surface: #fcf9f2;
-  --color-surface-container: #f1eee7;
   --color-surface-container-low: #f6f3ec;
+  --color-surface-container: #f1eee7;
   --color-surface-container-high: #ebe8e1;
   --color-surface-container-highest: #e5e2db;
-  --color-on-background: #1c1c18;
-  --color-on-surface: #1c1c18;
+
   --color-on-surface-variant: #43474e;
-  --color-outline-variant: #c4c6cf;
-  --color-error: #ba1a1a;
+  --color-outline-variant: rgba(196, 198, 207, 0.32);
+  
+  --shadow-s0: 0 1px 4px rgba(0, 32, 69, 0.06);
+  --shadow-s1: 0 4px 16px rgba(0, 32, 69, 0.09);
+  --shadow-s2: 0 12px 36px rgba(0, 32, 69, 0.15);
+  --shadow-s3: 0 20px 60px rgba(0, 32, 69, 0.25);
 }
 
 @layer base {
   body {
-    @apply bg-background text-on-background font-body antialiased;
+    @apply bg-surface text-primary font-body antialiased;
   }
 
   .hebrew-text {
-    direction: rtl;
     @apply font-headline;
+    direction: rtl;
   }
 
   .parchment-texture {
     background-image: url("https://www.transparenttextures.com/patterns/paper-fibers.png");
-    background-repeat: repeat;
+  }
+}
+
+@layer components {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }
 

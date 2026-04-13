@@ -5,7 +5,9 @@ import {
   Library, 
   Youtube, 
   Settings, 
-  HelpCircle 
+  HelpCircle,
+  UserCircle,
+  GraduationCap
 } from 'lucide-react';
 import { Screen } from '../types';
 
@@ -20,16 +22,17 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentScreen, onScreenChange 
     { id: 'browser', label: 'Tanakh Browser', icon: BookOpen },
     { id: 'study', label: 'Study Mode', icon: Library },
     { id: 'media', label: 'Media Library', icon: Youtube },
+    { id: 'account', label: 'My Account', icon: UserCircle },
   ];
 
   return (
-    <aside className="h-screen w-64 fixed left-0 top-0 bg-surface border-r border-outline-variant/10 flex flex-col py-8 z-50">
-      <div className="px-6 mb-10">
-        <h1 className="text-xl font-bold tracking-tight text-primary font-headline">The Scholarly Sanctuary</h1>
-        <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-secondary mt-1">The Living Archive</p>
+    <aside className="w-60 shrink-0 h-screen bg-surface border-r border-outline-variant flex flex-col py-6 z-50">
+      <div className="px-5 mb-8">
+        <h1 className="font-headline text-base font-bold text-primary leading-tight">The Scholarly Sanctuary</h1>
+        <p className="text-[9px] font-extrabold uppercase tracking-[0.18em] text-secondary mt-1">The Living Archive</p>
       </div>
 
-      <nav className="flex-1 space-y-1">
+      <nav className="flex-1">
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = currentScreen === item.id;
@@ -37,38 +40,42 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentScreen, onScreenChange 
             <button
               key={item.id}
               onClick={() => onScreenChange(item.id as Screen)}
-              className={`w-full flex items-center px-6 py-3 transition-all duration-300 group ${
+              className={`w-full flex items-center gap-2.5 pl-4.5 py-2.5 font-headline text-[0.85rem] transition-all duration-150 border-l-3 select-none ${
                 isActive 
-                  ? 'text-secondary border-l-4 border-secondary bg-secondary/5 font-bold' 
-                  : 'text-primary/70 hover:text-primary hover:bg-surface-container-high border-l-4 border-transparent'
+                  ? 'text-secondary font-bold border-secondary bg-secondary/5' 
+                  : 'text-primary/60 font-medium border-transparent hover:bg-surface-container-highest hover:text-primary'
               }`}
             >
-              <Icon className={`mr-3 w-5 h-5 ${isActive ? 'text-secondary' : 'text-primary/50 group-hover:text-primary'}`} />
-              <span className="font-headline text-sm">{item.label}</span>
+              <Icon className="w-[18px] h-[18px]" />
+              <span>{item.label}</span>
             </button>
           );
         })}
       </nav>
 
-      <div className="mt-auto px-6 pt-6 border-t border-outline-variant/10">
-        <div className="flex items-center gap-3 mb-6">
-          <img 
-            alt="Rabbi Ariel Azaria" 
-            className="w-10 h-10 rounded-full border border-secondary/20 object-cover" 
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_l0QudZlZhL4jsBqgr-e0Uc8nVHZlrpz9ghT1LIp2E0YGH4k6Ll0ehd5Slf--nfuM1OCeKuQmPc1noJO5nuD9GJiUfR4u_wiIGcczbaIcte9IH1OOo9nNSYpJMi_6Zz1DAqKqsyu4w6agc3skI7ahS8zOhz3NA0lgTOhDz__0v528cdusugGjU0J2CIHIvNFxS8_D_6dKELs7F0DH_MjFrx0TkFE3yDDbcRXG8UT7kZIE2PdN8D3Zm4ELh_EMouPTrJynHFrq2PA"
-          />
+      <div className="px-5 pt-4.5 border-t border-outline-variant mt-auto">
+        <div className="flex items-center gap-2.5 mb-3.5">
+          <div className="w-9 h-9 rounded-full bg-primary/5 border border-secondary/20 flex items-center justify-center shrink-0">
+            <GraduationCap className="w-4 h-4 text-secondary" />
+          </div>
           <div>
-            <p className="text-sm font-bold text-primary">Rabbi Ariel Azaria</p>
-            <p className="text-[10px] text-on-surface-variant font-bold uppercase tracking-wider">Lead Scholar</p>
+            <p className="text-[0.8rem] font-bold text-primary font-headline">אריאל עזריה</p>
+            <p className="text-[0.62rem] text-on-surface-variant">Lead Scholar</p>
           </div>
         </div>
         <div className="space-y-1">
-          <button className="w-full flex items-center text-primary/70 text-xs px-2 py-2 hover:text-primary transition-colors">
-            <Settings className="mr-2 w-4 h-4" />
+          <button 
+            onClick={() => onScreenChange('settings')}
+            className={`w-full flex items-center gap-1.5 text-[0.72rem] p-1.5 rounded transition-colors ${currentScreen === 'settings' ? 'text-secondary font-bold' : 'text-primary/60 hover:text-primary'}`}
+          >
+            <Settings className="w-[15px] h-[15px]" />
             Settings
           </button>
-          <button className="w-full flex items-center text-primary/70 text-xs px-2 py-2 hover:text-primary transition-colors">
-            <HelpCircle className="mr-2 w-4 h-4" />
+          <button 
+            onClick={() => onScreenChange('support')}
+            className={`w-full flex items-center gap-1.5 text-[0.72rem] p-1.5 rounded transition-colors ${currentScreen === 'support' ? 'text-secondary font-bold' : 'text-primary/60 hover:text-primary'}`}
+          >
+            <HelpCircle className="w-[15px] h-[15px]" />
             Support
           </button>
         </div>

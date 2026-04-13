@@ -1,4 +1,4 @@
-import { Verse, Lesson, Note } from './types';
+import { Verse, Lesson, Note, Word } from './types';
 
 export const VERSES: Verse[] = [
   {
@@ -51,8 +51,8 @@ export const VERSES: Verse[] = [
 export const LESSONS: Lesson[] = [
   {
     id: 'lesson-1',
-    title: 'שיעור ZOOM למורים',
-    description: 'A comprehensive Zoom training session for educators, focusing on digital pedagogy and classroom management.',
+    title: 'שיעור א׳ — Tanakh Lesson 1',
+    description: 'A comprehensive introduction to the opening of Bereshit, exploring the linguistic roots of creation.',
     duration: '59:40',
     thumbnail: 'https://img.youtube.com/vi/a-h60-owwSg/maxresdefault.jpg',
     author: 'Rabbi Ariel Azaria',
@@ -62,33 +62,42 @@ export const LESSONS: Lesson[] = [
   },
   {
     id: 'lesson-2',
-    title: 'איך לעבוד עם תלמידים שמציקים לכם',
-    description: 'Practical technical advice on managing challenging student behavior in a digital learning environment.',
+    title: 'שיעור ב׳ — Tanakh Lesson 2',
+    description: 'An exploration of the second day of creation and the separation of the waters.',
     duration: '15:20',
-    thumbnail: 'https://img.youtube.com/vi/fkdby9nGq9Q/maxresdefault.jpg',
+    thumbnail: 'https://img.youtube.com/vi/Wk561CcVyxQ/maxresdefault.jpg',
     author: 'Rabbi Ariel Azaria',
-    youtubeId: 'fkdby9nGq9Q'
+    youtubeId: 'Wk561CcVyxQ'
   },
   {
     id: 'lesson-3',
-    title: 'מלכים א פרק כ - הקדמה לסיפור כרם נבות',
-    description: 'An introduction to the story of Naboth\'s Vineyard in Kings I, Chapter 20, exploring the ethical and legal implications.',
+    title: 'שיעור ג׳ — Tanakh Lesson 3',
+    description: 'Deep dive into the creation of life and the botanical wonders of the third day.',
     duration: '12:45',
-    thumbnail: 'https://img.youtube.com/vi/Wk561CcVyxQ/maxresdefault.jpg',
+    thumbnail: 'https://img.youtube.com/vi/M4TEukZCpZM/maxresdefault.jpg',
     author: 'Rabbi Ariel Azaria',
-    youtubeId: 'Wk561CcVyxQ',
+    youtubeId: 'M4TEukZCpZM',
     book: '1 Kings',
     chapter: 20
   },
   {
     id: 'lesson-4',
-    title: 'בני גורן עמוד 160 תרגיל 96',
-    description: 'A detailed walkthrough of a complex mathematical exercise from the Benny Goren textbook.',
+    title: 'שיעור ד׳ — Tanakh Lesson 4',
+    description: 'The celestial bodies and the establishment of time and seasons.',
     duration: '08:30',
-    thumbnail: 'https://img.youtube.com/vi/l1GzD0S91lA/maxresdefault.jpg',
+    thumbnail: 'https://img.youtube.com/vi/fkdby9nGq9Q/maxresdefault.jpg',
     author: 'Rabbi Ariel Azaria',
-    youtubeId: 'l1GzD0S91lA'
+    youtubeId: 'fkdby9nGq9Q'
   }
+];
+
+export const WORDS: Word[] = [
+  {heb:'בְּרֵאשִׁית', trans:'Bereshit', mean:'In the beginning', root:'ר-א-ש', gram:'Noun, feminine, singular, construct state with prefix ב (in/at)', note:'Rashi notes this is not an absolute beginning but a relative one — "in a beginning of". The letter Bet is the second letter of the aleph-bet, teaching that there is mystery before creation.'},
+  {heb:'בָּרָא', trans:'Bara', mean:'He created', root:'ב-ר-א', gram:'Verb, Qal binyan, perfect tense, 3rd person masculine singular', note:'Bara denotes creation ex nihilo — from nothing. This root is used exclusively with God as subject in the Tanakh, distinguishing divine creation from human making (asah/yatzar).'},
+  {heb:'אֱלֹהִים', trans:'Elohim', mean:'God', root:'א-ל-ה', gram:'Noun, masculine, plural form — but takes singular verb (Bara)', note:'The plural form Elohim with a singular verb is the classic proof-text for the Jewish understanding of divine unity. The plurality expresses majesty, not multiplicity.'},
+  {heb:'אֵת', trans:'Et', mean:'Direct object marker', root:'א-ת', gram:'Particle, marks the definite direct object', note:'The untranslatable את. Kabbalistic tradition (Sefer Yetzirah) reads it as encompassing all 22 letters from Aleph to Tav — hinting that the entire Torah is encoded in creation.'},
+  {heb:'הַשָּׁמַיִם', trans:'HaShamayim', mean:'The heavens', root:'ש-מ-ם', gram:'Noun, masculine, dual/plural with definite article', note:'Shamayim is grammatically dual in form, suggesting two heavens. The word may derive from esh (fire) + mayim (water) — fire and water combined at creation.'},
+  {heb:'הָאָרֶץ', trans:'HaAretz', mean:'The earth', root:'א-ר-צ', gram:'Noun, feminine, singular with definite article', note:'Eretz is the physical earth but also the Land of Israel throughout Tanakh. The juxtaposition shamayim/aretz (heaven/earth) is a merism encompassing all of existence.'},
 ];
 
 export const NOTES: Note[] = [

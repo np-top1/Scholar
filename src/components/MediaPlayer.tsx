@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Play, 
   Pause,
@@ -6,10 +6,10 @@ import {
   SkipForward, 
   Volume2, 
   Maximize2,
-  Library,
   ChevronUp,
   ChevronDown,
-  X
+  X,
+  Youtube
 } from 'lucide-react';
 import { Lesson } from '../types';
 
@@ -22,7 +22,7 @@ export const MediaPlayer: React.FC<MediaPlayerProps> = ({ activeLesson }) => {
   const [isPlaying, setIsPlaying] = useState(false);
 
   // Auto-play when a new lesson is selected
-  React.useEffect(() => {
+  useEffect(() => {
     if (activeLesson) {
       setIsPlaying(true);
     }
@@ -36,20 +36,18 @@ export const MediaPlayer: React.FC<MediaPlayerProps> = ({ activeLesson }) => {
   };
 
   return (
-    <footer className={`fixed bottom-0 right-0 w-[calc(100%-16rem)] z-50 bg-primary text-surface shadow-[0_-10px_30px_rgba(0,32,69,0.15)] transition-all duration-500 rounded-tl-2xl ${isExpanded ? 'h-[80vh]' : 'h-20'}`}>
+    <footer className={`fixed bottom-0 right-0 w-full lg:w-[calc(100%-16rem)] z-50 bg-primary text-white shadow-s3 transition-all duration-500 rounded-t-xl lg:rounded-t-none lg:rounded-tl-xl ${isExpanded ? 'h-[85vh]' : 'h-[4.5rem]'}`}>
       {/* Expanded Video View */}
       {isExpanded && (
-        <div className="absolute inset-0 p-8 pt-12 flex flex-col">
+        <div className="absolute inset-0 p-6 lg:p-10 flex flex-col">
           <div className="flex justify-between items-start mb-6">
             <div className="flex items-center gap-4">
-              <img 
-                alt="Rabbi Ariel Azaria" 
-                className="w-12 h-12 rounded-full border border-secondary/20 object-cover" 
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_l0QudZlZhL4jsBqgr-e0Uc8nVHZlrpz9ghT1LIp2E0YGH4k6Ll0ehd5Slf--nfuM1OCeKuQmPc1noJO5nuD9GJiUfR4u_wiIGcczbaIcte9IH1OOo9nNSYpJMi_6Zz1DAqKqsyu4w6agc3skI7ahS8zOhz3NA0lgTOhDz__0v528cdusugGjU0J2CIHIvNFxS8_D_6dKELs7F0DH_MjFrx0TkFE3yDDbcRXG8UT7kZIE2PdN8D3Zm4ELh_EMouPTrJynHFrq2PA"
-              />
+              <div className="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center border border-secondary/30">
+                <Youtube className="text-secondary w-6 h-6" />
+              </div>
               <div>
-                <h2 className="text-3xl font-headline font-bold text-surface">{activeLesson.title}</h2>
-                <p className="text-secondary font-body text-sm uppercase tracking-widest mt-1">{activeLesson.author}</p>
+                <h2 className="font-headline text-[1.5rem] font-bold text-white leading-tight">{activeLesson.title}</h2>
+                <p className="text-secondary font-bold text-[0.65rem] uppercase tracking-[0.15em] mt-1">אריאל עזריה · Shiur</p>
               </div>
             </div>
             <button 
@@ -60,13 +58,13 @@ export const MediaPlayer: React.FC<MediaPlayerProps> = ({ activeLesson }) => {
             </button>
           </div>
           
-          <div className="flex-1 bg-black rounded-xl overflow-hidden shadow-2xl relative">
+          <div className="flex-1 bg-black rounded-lg overflow-hidden shadow-s3 relative border border-white/5">
             {activeLesson.youtubeId ? (
               <iframe
                 key={`${activeLesson.youtubeId}-${isPlaying}`}
                 width="100%"
                 height="100%"
-                src={`https://www.youtube.com/embed/${activeLesson.youtubeId}?autoplay=${isPlaying ? 1 : 0}`}
+                src={`https://www.youtube.com/embed/${activeLesson.youtubeId}?autoplay=${isPlaying ? 1 : 0}&modestbranding=1&rel=0`}
                 title={activeLesson.title}
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -77,13 +75,13 @@ export const MediaPlayer: React.FC<MediaPlayerProps> = ({ activeLesson }) => {
                 <div className="w-20 h-20 bg-secondary/20 rounded-full flex items-center justify-center">
                   <Play className="w-10 h-10 text-secondary fill-current" />
                 </div>
-                <p className="text-surface/60 font-body italic">Video content not available for this lesson.</p>
+                <p className="text-white/40 font-body italic text-sm">Video content not available for this lesson.</p>
               </div>
             )}
           </div>
           
-          <div className="mt-6">
-            <p className="text-surface/70 font-body leading-relaxed max-w-3xl">
+          <div className="mt-6 max-w-3xl">
+            <p className="text-white/65 text-[0.9rem] leading-relaxed">
               {activeLesson.description}
             </p>
           </div>
@@ -91,54 +89,54 @@ export const MediaPlayer: React.FC<MediaPlayerProps> = ({ activeLesson }) => {
       )}
 
       {/* Mini Player Bar */}
-      <div className={`h-20 flex justify-between items-center px-12 ${isExpanded ? 'absolute bottom-0 left-0 right-0 border-t border-white/10' : ''}`}>
-        <div className="flex items-center gap-4">
+      <div className={`h-[4.5rem] flex justify-between items-center px-6 lg:px-10 ${isExpanded ? 'absolute bottom-0 left-0 right-0 border-t border-white/10 bg-primary' : ''}`}>
+        <div className="flex items-center gap-4 min-w-[14rem]">
           <div className="relative group cursor-pointer" onClick={() => setIsExpanded(!isExpanded)}>
-            <div className="w-12 h-12 bg-white/10 rounded flex items-center justify-center border border-white/10 overflow-hidden">
+            <div className="w-11 h-11 bg-white/10 rounded-[4px] flex items-center justify-center border border-white/10 overflow-hidden">
               {activeLesson.thumbnail ? (
                 <img src={activeLesson.thumbnail} alt={activeLesson.title} className="w-full h-full object-cover" />
               ) : (
-                <Library className="text-secondary w-6 h-6" />
+                <Youtube className="text-secondary w-5 h-5" />
               )}
             </div>
-            <div className="absolute inset-0 bg-primary/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-              {isExpanded ? <ChevronDown className="w-6 h-6" /> : <ChevronUp className="w-6 h-6" />}
+            <div className="absolute inset-0 bg-primary/75 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+              {isExpanded ? <ChevronDown className="w-5 h-5" /> : <ChevronUp className="w-5 h-5" />}
             </div>
           </div>
-          <div>
-            <p className="text-sm font-bold truncate w-64">{activeLesson.title}</p>
-            <p className="text-[10px] uppercase tracking-widest text-surface/60">{activeLesson.author} • {activeLesson.duration}</p>
+          <div className="max-w-[12rem] lg:max-w-xs">
+            <p className="text-[0.85rem] font-bold truncate text-white">{activeLesson.title}</p>
+            <p className="text-[0.6rem] uppercase tracking-[0.12em] text-white/45 font-bold mt-0.5">אריאל עזריה · {activeLesson.duration}</p>
           </div>
         </div>
 
-        <div className="flex items-center gap-10">
-          <button className="text-surface/80 hover:text-secondary transition-all">
-            <SkipBack className="w-6 h-6" />
+        <div className="flex items-center gap-6 lg:gap-10">
+          <button className="text-white/60 hover:text-secondary transition-colors">
+            <SkipBack className="w-5 h-5" />
           </button>
           <button 
             onClick={togglePlay}
-            className="text-secondary hover:scale-110 transition-transform"
+            className="text-secondary hover:scale-110 transition-transform p-1"
           >
-            {isPlaying ? <Pause className="w-10 h-10 fill-current" /> : <Play className="w-10 h-10 fill-current" />}
+            {isPlaying ? <Pause className="w-9 h-9 fill-current" /> : <Play className="w-9 h-9 fill-current" />}
           </button>
-          <button className="text-surface/80 hover:text-secondary transition-all">
-            <SkipForward className="w-6 h-6" />
+          <button className="text-white/60 hover:text-secondary transition-colors">
+            <SkipForward className="w-5 h-5" />
           </button>
         </div>
 
-        <div className="flex items-center gap-6">
-          <div className="flex items-center gap-4">
-            <Volume2 className="w-4 h-4 text-surface/60" />
-            <div className="w-24 h-1 bg-white/10 rounded-full overflow-hidden">
-              <div className="w-1/3 h-full bg-secondary"></div>
+        <div className="hidden md:flex items-center gap-6 min-w-[14rem] justify-end">
+          <div className="flex items-center gap-3">
+            <Volume2 className="w-4 h-4 text-white/40" />
+            <div className="w-20 h-[3px] bg-white/15 rounded-full overflow-hidden">
+              <div className="w-[45%] h-full bg-secondary"></div>
             </div>
           </div>
-          <div className="w-px h-6 bg-white/10 mx-2"></div>
+          <div className="w-px h-5 bg-white/10 mx-1"></div>
           <button 
             onClick={() => setIsExpanded(!isExpanded)}
-            className="text-surface/80 hover:text-secondary transition-all"
+            className="text-white/60 hover:text-secondary transition-colors"
           >
-            <Maximize2 className="w-5 h-5" />
+            <Maximize2 className="w-[18px] h-[18px]" />
           </button>
         </div>
       </div>

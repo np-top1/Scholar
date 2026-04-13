@@ -1,5 +1,5 @@
 import React from 'react';
-import { Bookmark, Share2, Play, GraduationCap, ChevronRight } from 'lucide-react';
+import { Bookmark, Share2, Play, ChevronRight, MessageSquare, ChevronLeft, BookOpen, Search, Youtube } from 'lucide-react';
 import { VERSES, LESSONS } from '../constants';
 import { motion } from 'motion/react';
 import { Lesson } from '../types';
@@ -20,9 +20,7 @@ export const TanakhBrowser: React.FC<TanakhBrowserProps> = ({ onPlayLesson, acti
   const filteredVerses = VERSES.filter(v => v.book === currentBook && v.chapter === currentChapter);
   
   // If no verses found for current context, fallback to first few verses
-  const displayVerses = filteredVerses.length > 0 ? filteredVerses : VERSES.slice(0, 3);
-
-  const commentaryLesson = activeLesson || LESSONS[2];
+  const displayVerses = filteredVerses.length > 0 ? filteredVerses : VERSES.slice(0, 5);
 
   const discussionPoints = currentBook === '1 Kings' 
     ? [
@@ -33,152 +31,128 @@ export const TanakhBrowser: React.FC<TanakhBrowserProps> = ({ onPlayLesson, acti
     : [
         { time: '04:12', title: "Defining the state of 'Nothingness'" },
         { time: '12:45', title: "The Spirit of God as 'Ruach'", active: true },
-        { time: '28:30', title: "Symbolism of the Waters in Kabbalah" },
+        { time: '28:30', title: "Symbolism of the Waters" },
       ];
 
   return (
     <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="pt-16 min-h-screen bg-surface"
+      className="py-6 px-7 max-w-[74rem] mx-auto pb-32"
     >
-      {/* Chapter Navigation */}
-      <section className="px-10 py-8 bg-surface-container-low/30 border-b border-outline-variant/10">
-        <div className="flex items-center justify-between mb-6">
-          <div>
-            <h2 className="text-3xl font-headline font-bold text-primary flex items-center gap-4">
-              <span className="hebrew-text">{currentHebrewName}</span>
-              <span className="text-[10px] font-bold text-secondary tracking-[0.2em] uppercase">{currentBook} • Chapter {currentChapter}</span>
-            </h2>
-          </div>
-          <div className="flex gap-2">
-            <button className="w-10 h-10 flex items-center justify-center rounded-full border border-outline-variant/30 hover:bg-surface-container-high transition-colors text-primary/60">
-              <Bookmark className="w-5 h-5" />
-            </button>
-            <button className="w-10 h-10 flex items-center justify-center rounded-full border border-outline-variant/30 hover:bg-surface-container-high transition-colors text-primary/60">
-              <Share2 className="w-5 h-5" />
-            </button>
-          </div>
-        </div>
-        <div className="flex gap-3 overflow-x-auto pb-2 no-scrollbar">
-          {chapters.map((ch, idx) => (
-            <button 
-              key={idx}
-              className={`flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-full font-bold text-lg transition-all ${
-                idx === 0 
-                  ? 'bg-secondary text-surface shadow-md shadow-secondary/20' 
-                  : 'border border-outline-variant/50 text-primary/60 hover:border-secondary hover:text-secondary'
-              }`}
-            >
-              {ch}
-            </button>
-          ))}
-        </div>
-      </section>
+      <div className="mb-6">
+        <h2 className="font-headline text-[1.65rem] font-bold text-primary mb-1">Tanakh Browser</h2>
+        <p className="text-[0.78rem] text-on-surface-variant">Read the Hebrew text with English translation. Click a verse to highlight it, then watch the related shiur.</p>
+      </div>
 
-      {/* Dual Pane Layout */}
-      <div className="grid grid-cols-12 gap-0 min-h-[calc(100vh-14rem)]">
-        {/* Left Pane: Hebrew Text */}
-        <div className="col-span-12 lg:col-span-7 px-10 py-12 bg-surface order-2 lg:order-1" dir="rtl">
-          <div className="space-y-16 max-w-3xl mx-auto">
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_18rem] gap-8 items-start">
+        {/* Hebrew text */}
+        <div className="bg-surface border border-outline-variant rounded-lg p-7 shadow-s0">
+          <h3 className="font-headline text-[1.3rem] font-bold text-primary flex justify-between items-center mb-2">
+            <span className="hebrew-text">{currentHebrewName}</span>
+            <span className="text-[0.62rem] font-bold text-secondary uppercase tracking-[0.2em]">{currentBook} · Chapter {currentChapter}</span>
+          </h3>
+          
+          <div className="flex gap-2 mb-6 flex-wrap">
+            {chapters.map((ch, idx) => (
+              <button 
+                key={idx}
+                className={`w-9 h-9 rounded-full flex items-center justify-center font-headline text-[0.9rem] font-bold transition-all border ${
+                  idx === 0 
+                    ? 'bg-secondary text-white border-secondary shadow-[0_2px_8px_rgba(119,90,25,0.26)]' 
+                    : 'border-outline-variant text-primary/45 hover:border-secondary hover:text-secondary'
+                }`}
+              >
+                {ch}
+              </button>
+            ))}
+          </div>
+
+          <div className="space-y-11">
             {displayVerses.map((verse) => (
               <div 
                 key={verse.id} 
-                className={`group cursor-pointer relative transition-all duration-300 ${
-                  verse.number === 1 ? 'p-8 bg-surface-container-low/60 rounded-xl shadow-sm border-r-4 border-secondary' : ''
+                className={`group cursor-pointer transition-all duration-200 border-r-3 border-transparent pr-3.5 ${
+                  verse.number === 2 ? 'bg-surface-container-low/70 rounded-lg p-5 border-r-4 border-secondary relative' : 'hover:border-secondary/25'
                 }`}
               >
-                <div className="flex items-start gap-6">
-                  <span className={`text-xs font-bold font-body mt-4 ${verse.number === 1 ? 'text-secondary' : 'text-secondary/40'}`}>
-                    {verse.number}
-                  </span>
-                  <p className="hebrew-text text-4xl text-primary flex-1 leading-relaxed">
-                    {verse.hebrew}
-                  </p>
-                </div>
-                <div className={`mt-6 pr-10 ${verse.number !== 1 ? 'border-r-2 border-secondary/10' : ''}`}>
-                  <p className={`font-body text-on-surface-variant leading-relaxed italic text-lg ${verse.number !== 1 ? 'opacity-80' : ''}`} dir="ltr">
-                    {verse.english}
-                  </p>
-                </div>
-                {verse.number === 1 && (
-                  <div className="absolute -right-2 top-10 flex items-center">
-                    <span className="bg-secondary text-surface px-3 py-1 rounded-r-full text-[10px] font-bold uppercase tracking-widest shadow-sm">Active Verse</span>
+                {verse.number === 2 && (
+                  <div className="absolute -right-1.5 top-6 bg-secondary text-white text-[0.5rem] font-bold uppercase tracking-[0.1em] px-2.5 py-0.5 rounded-r-full shadow-sm">
+                    Active
                   </div>
                 )}
+                <div className={`text-[0.62rem] font-bold mb-1.5 text-right direction-rtl ${verse.number === 2 ? 'text-secondary' : 'text-secondary/36'}`}>
+                  {verse.number}
+                </div>
+                <p className="hebrew-text text-[1.5rem] text-primary leading-[1.75] text-right">
+                  {verse.hebrew}
+                </p>
+                <p className={`mt-2 text-[0.85rem] font-body text-on-surface-variant leading-relaxed italic direction-ltr ${verse.number === 2 ? '' : 'border-r-2 border-secondary/10 pr-3'}`}>
+                  {verse.english}
+                </p>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Right Pane: Video Commentary */}
-        <div className="col-span-12 lg:col-span-5 px-8 py-12 lg:sticky lg:top-16 h-fit bg-surface-container-low/40 border-l border-outline-variant/10 order-1 lg:order-2">
-          <div 
-            className="rounded-xl overflow-hidden shadow-2xl relative group bg-black aspect-video mb-8 cursor-pointer"
-            onClick={() => onPlayLesson(commentaryLesson)}
-          >
-            <img 
-              alt={commentaryLesson.title} 
-              className="w-full h-full object-cover opacity-60 transition-transform group-hover:scale-105 duration-700" 
-              src={commentaryLesson.thumbnail}
-            />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <button className="w-20 h-20 bg-secondary text-surface rounded-full flex items-center justify-center shadow-2xl transition-transform group-hover:scale-110 active:scale-95">
-                <Play className="w-10 h-10 fill-current ml-1" />
-              </button>
-            </div>
-            <div className="absolute bottom-0 left-0 right-0 p-6 bg-primary/40 backdrop-blur-xl border-t border-white/10 flex justify-between items-end">
-              <div dir="ltr">
-                <h4 className="text-white font-headline text-lg font-bold">{commentaryLesson.title}</h4>
-                <p className="text-white/70 text-sm font-body">{currentBook} • Chapter {currentChapter} Intro</p>
-              </div>
-              <span className="text-white/60 text-[10px] font-mono">{commentaryLesson.duration}</span>
+        {/* Sidebar: shiurim + discussion */}
+        <div className="flex flex-col gap-5">
+          <div className="bg-surface border border-outline-variant rounded-lg p-5 shadow-s0">
+            <h4 className="font-headline text-[0.9rem] font-bold text-primary mb-3.5 flex items-center gap-2">
+              <Play className="w-[17px] h-[17px] text-secondary" />
+              Related Shiurim
+            </h4>
+            <div className="space-y-2">
+              {LESSONS.map((lesson, idx) => (
+                <div 
+                  key={lesson.id}
+                  onClick={() => onPlayLesson(lesson)}
+                  className="flex gap-2.5 p-2.5 rounded-lg transition-colors cursor-pointer hover:bg-surface-container-high group"
+                >
+                  <div className="w-24 h-15 rounded-[4px] overflow-hidden shrink-0 relative">
+                    <img src={lesson.thumbnail} alt="" className="w-full h-full object-cover" />
+                    <div className="absolute inset-0 bg-primary/28 group-hover:bg-primary/8 flex items-center justify-center transition-colors">
+                      <div className="w-6.5 h-6.5 bg-secondary rounded-full flex items-center justify-center">
+                        <Play className="w-3 h-3 text-white fill-current ml-0.5" />
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-[0.8rem] font-bold text-primary group-hover:text-secondary transition-colors line-clamp-1">{lesson.title}</div>
+                    <div className="text-[0.65rem] text-on-surface-variant mt-0.5">אריאל עזריה · Tanakh</div>
+                    <div className="text-[0.56rem] font-bold text-secondary uppercase tracking-tight mt-1">Watch in Media Library →</div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
 
-          <div className="space-y-8" dir="ltr">
-            <div>
-              <div className="flex items-center gap-4 mb-4">
-                <img 
-                  alt="Rabbi Ariel Azaria" 
-                  className="w-12 h-12 rounded-full border border-secondary/20 object-cover" 
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_l0QudZlZhL4jsBqgr-e0Uc8nVHZlrpz9ghT1LIp2E0YGH4k6Ll0ehd5Slf--nfuM1OCeKuQmPc1noJO5nuD9GJiUfR4u_wiIGcczbaIcte9IH1OOo9nNSYpJMi_6Zz1DAqKqsyu4w6agc3skI7ahS8zOhz3NA0lgTOhDz__0v528cdusugGjU0J2CIHIvNFxS8_D_6dKELs7F0DH_MjFrx0TkFE3yDDbcRXG8UT7kZIE2PdN8D3Zm4ELh_EMouPTrJynHFrq2PA"
-                />
-                <h3 className="text-primary font-headline text-2xl font-bold flex items-center gap-3">
-                  <GraduationCap className="text-secondary w-6 h-6" />
-                  Rabbi Azaria's Insight
-                </h3>
-              </div>
-              <p className="text-on-surface-variant font-body leading-relaxed text-sm">
-                {commentaryLesson.description}
-              </p>
-            </div>
-
-            <div className="space-y-4">
-              <div className="flex items-center justify-between border-b border-outline-variant/10 pb-2">
-                <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">Discussion Points</h4>
-                <span className="text-[8px] text-on-surface-variant/60 font-bold uppercase">Click to Jump</span>
-              </div>
-              <div className="space-y-3">
-                {discussionPoints.map((point, idx) => (
-                  <div 
-                    key={idx}
-                    className={`flex items-center gap-4 p-4 rounded-lg border transition-all cursor-pointer group ${
-                      point.active 
-                        ? 'bg-secondary/5 border-secondary/20' 
-                        : 'bg-surface border-outline-variant/20 hover:border-secondary/30'
-                    }`}
-                  >
-                    <span className="text-secondary font-bold text-xs">{point.time}</span>
-                    <p className={`text-sm font-semibold ${point.active ? 'text-primary' : 'text-primary/80'}`}>{point.title}</p>
+          <div className="bg-surface border border-outline-variant rounded-lg p-5 shadow-s0">
+            <h4 className="font-headline text-[0.9rem] font-bold text-primary mb-3.5 flex items-center gap-2">
+              <MessageSquare className="w-[17px] h-[17px] text-secondary" />
+              Discussion Points
+            </h4>
+            <div className="space-y-2">
+              {discussionPoints.map((point, idx) => (
+                <div 
+                  key={idx}
+                  className={`flex items-center gap-2.5 p-2.5 rounded-lg border transition-colors cursor-pointer group ${
+                    point.active 
+                      ? 'bg-secondary/7 border-secondary/22' 
+                      : 'bg-surface border-outline-variant hover:border-secondary/26'
+                  }`}
+                >
+                  <span className="text-[0.65rem] font-bold text-secondary w-9 shrink-0">{point.time}</span>
+                  <p className={`text-[0.78rem] font-semibold flex-1 ${point.active ? 'text-primary font-bold' : 'text-primary'}`}>{point.title}</p>
+                  <div className="shrink-0">
                     {point.active ? (
-                      <Play className="w-4 h-4 ml-auto text-secondary fill-current" />
+                      <Play className="w-3.5 h-3.5 text-secondary fill-secondary" />
                     ) : (
-                      <ChevronRight className="w-4 h-4 ml-auto text-primary/40 group-hover:text-secondary transition-colors" />
+                      <ChevronRight className="w-3.5 h-3.5 text-primary/25 group-hover:text-secondary transition-colors" />
                     )}
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>

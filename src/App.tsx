@@ -6,6 +6,9 @@ import { Dashboard } from './components/Dashboard';
 import { TanakhBrowser } from './components/TanakhBrowser';
 import { StudyMode } from './components/StudyMode';
 import { MediaLibrary } from './components/MediaLibrary';
+import { Settings } from './components/Settings';
+import { Support } from './components/Support';
+import { Account } from './components/Account';
 import { Screen, Lesson } from './types';
 import { LESSONS } from './constants';
 
@@ -23,19 +26,25 @@ export default function App() {
         return <StudyMode onPlayLesson={setActiveLesson} activeLesson={activeLesson} />;
       case 'media':
         return <MediaLibrary onPlayLesson={setActiveLesson} activeLesson={activeLesson} />;
+      case 'settings':
+        return <Settings />;
+      case 'support':
+        return <Support />;
+      case 'account':
+        return <Account />;
       default:
         return <Dashboard onPlayLesson={setActiveLesson} activeLesson={activeLesson} />;
     }
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="flex h-screen overflow-hidden">
       <Sidebar currentScreen={currentScreen} onScreenChange={setCurrentScreen} />
-      <div className="ml-64">
-        <TopBar />
-        <main className="min-h-screen">
+      <div className="flex-1 flex flex-col overflow-hidden min-w-0">
+        <TopBar onScreenChange={setCurrentScreen} />
+        <div className="flex-1 overflow-y-auto overflow-x-hidden" id="scroll">
           {renderScreen()}
-        </main>
+        </div>
         <MediaPlayer activeLesson={activeLesson} />
       </div>
     </div>

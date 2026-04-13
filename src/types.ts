@@ -1,4 +1,13 @@
-export type Screen = 'dashboard' | 'browser' | 'study' | 'media';
+export type Screen = 'dashboard' | 'browser' | 'study' | 'media' | 'settings' | 'support' | 'account';
+
+export interface Word {
+  heb: string;
+  trans: string;
+  mean: string;
+  root: string;
+  gram: string;
+  note: string;
+}
 
 export interface Verse {
   id: string;

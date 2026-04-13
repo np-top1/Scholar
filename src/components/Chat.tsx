@@ -1,11 +1,20 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Send, Bot, User, Sparkles, X, Minimize2, Maximize2 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { GoogleGenAI } from '@google/genai';
 
 import { Screen, Lesson } from '../types';
 
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+const getAi = () => {
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) {
+    console.warn('GEMINI_API_KEY is not defined. AI features will be disabled.');
+    return null;
+  }
+  return new GoogleGenAI({ apiKey });
+};
+
+const ai = getAi();
 
 interface Message {
   role: 'user' | 'model';
@@ -46,6 +55,12 @@ export const Chat: React.FC<ChatProps> = ({ activeLesson, currentScreen }) => {
     const contextInfo = activeLesson 
       ? `The user is currently viewing the lesson: "${activeLesson.title}" which covers ${activeLesson.book || 'II Kings'} chapter ${activeLesson.chapter || 1}.`
       : `The user is currently on the ${currentScreen} screen.`;
+
+    if (!ai) {
+      setMessages(prev => [...prev, { role: 'model', content: 'מצטער, ה-AI לא מוגדר כראוי (חסר מפתח API). אנא בדוק את ההגדרות.' }]);
+      setIsLoading(false);
+      return;
+    }
 
     try {
       const response = await ai.models.generateContent({

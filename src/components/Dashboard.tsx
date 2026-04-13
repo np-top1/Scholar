@@ -1,7 +1,7 @@
 import React from 'react';
 import { BookOpen, Share2, History, Bookmark, ArrowRight, Play, Library, Flame, Youtube, Clock, TrendingUp, Calendar, ChevronRight } from 'lucide-react';
 import { LESSONS } from '../constants';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { Lesson } from '../types';
 
 interface DashboardProps {

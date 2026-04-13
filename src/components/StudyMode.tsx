@@ -1,7 +1,7 @@
 import React from 'react';
 import { FileEdit, Lightbulb, Play, BookOpen, Search } from 'lucide-react';
 import { NOTES, LESSONS, VERSES, WORDS } from '../constants';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { Lesson } from '../types';
 
 interface StudyModeProps {

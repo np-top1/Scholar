@@ -1,7 +1,7 @@
 import React from 'react';
 import { Bookmark, Share2, Play, ChevronRight, MessageSquare, ChevronLeft, BookOpen, Search, Youtube } from 'lucide-react';
 import { VERSES, LESSONS } from '../constants';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { Lesson } from '../types';
 
 interface TanakhBrowserProps {

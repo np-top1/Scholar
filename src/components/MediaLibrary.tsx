@@ -1,6 +1,6 @@
 import React from 'react';
 import { Play, Youtube, Clock, ArrowRight } from 'lucide-react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { LESSONS } from '../constants';
 import { Lesson } from '../types';
 

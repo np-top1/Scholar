@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { User, Mail, Shield, CreditCard, LogOut, Camera, History, Bookmark, ChevronRight } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Screen } from '../types';
 
 interface AccountProps {

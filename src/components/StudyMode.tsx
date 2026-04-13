@@ -10,8 +10,8 @@ interface StudyModeProps {
 }
 
 export const StudyMode: React.FC<StudyModeProps> = ({ onPlayLesson, activeLesson }) => {
-  // Use active lesson context if available, otherwise default to Genesis
-  const currentBook = activeLesson?.book || 'Genesis';
+  // Use active lesson context if available, otherwise default to II Kings
+  const currentBook = activeLesson?.book || 'II Kings';
   const currentChapter = activeLesson?.chapter || 1;
   
   const filteredVerses = VERSES.filter(v => v.book === currentBook && v.chapter === currentChapter);

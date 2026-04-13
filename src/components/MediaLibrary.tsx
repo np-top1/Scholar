@@ -110,16 +110,16 @@ export const MediaLibrary: React.FC<MediaLibraryProps> = ({ onPlayLesson }) => {
                 <div className="absolute inset-0 bg-gradient-to-r from-primary/90 to-transparent"></div>
                 <div className="absolute inset-0 p-8 flex flex-col justify-end">
                   <div className="bg-secondary text-white text-[0.56rem] font-bold uppercase px-2.5 py-0.5 rounded-[2px] w-max mb-3 tracking-wider">Series Spotlight</div>
-                  <h5 className="font-headline text-[1.8rem] font-bold text-white mb-2">Isaiah: Visions of Peace</h5>
-                  <p className="text-white/75 max-w-lg text-[0.85rem] mb-4 leading-relaxed">A multi-part series exploring the transformative prophecies of Yeshayahu and the concept of universal harmony.</p>
+                  <h5 className="font-headline text-[1.8rem] font-bold text-white mb-2">Elijah: The Fiery Prophet</h5>
+                  <p className="text-white/75 max-w-lg text-[0.85rem] mb-4 leading-relaxed">A multi-part series exploring the life and miracles of Elijah the Prophet in the books of Kings.</p>
                   <div className="flex items-center gap-6">
                     <div className="flex items-center text-white/90 text-[0.65rem] font-bold gap-2 uppercase tracking-wide">
                       <Youtube className="w-4 h-4 text-secondary" />
-                      12 Lessons
+                      4 Lessons
                     </div>
                     <div className="flex items-center text-white/90 text-[0.65rem] font-bold gap-2 uppercase tracking-wide">
                       <Clock className="w-4 h-4 text-secondary" />
-                      14 Hours Total
+                      3 Hours Total
                     </div>
                   </div>
                 </div>
@@ -127,9 +127,9 @@ export const MediaLibrary: React.FC<MediaLibraryProps> = ({ onPlayLesson }) => {
             </div>
             <div className="flex flex-col gap-4">
               {[
-                { title: 'Jeremiah: The Weeping Prophet', lessons: '8 Lessons', seed: 'torn' },
-                { title: 'Ezekiel: The Chariot Vision', lessons: '6 Lessons', seed: 'wheel' },
-                { title: 'The Minor Prophets', lessons: '24 Lessons', seed: 'lamps' },
+                { title: 'Elisha: The Double Portion', lessons: '8 Lessons', seed: 'torn' },
+                { title: 'The Chariot of Fire', lessons: '6 Lessons', seed: 'wheel' },
+                { title: 'Prophetic Miracles', lessons: '24 Lessons', seed: 'lamps' },
               ].map((item, idx) => (
                 <div key={idx} className="flex gap-4 p-3 rounded-lg border border-outline-variant/10 hover:border-secondary/30 transition-all cursor-pointer group bg-surface shadow-s0">
                   <div className="w-24 h-16 rounded-[4px] overflow-hidden shrink-0">

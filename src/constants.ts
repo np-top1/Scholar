@@ -2,29 +2,9 @@ import { Verse, Lesson, Note, Word } from './types';
 
 export const VERSES: Verse[] = [
   {
-    id: 'gen-1-1',
-    number: 1,
-    hebrew: 'בְּרֵאשִׁית בָּרָא אֱלֹהִים אֵת הַשָּׁמַיִם וְאֵת הָאָרֶץ׃',
-    english: 'In the beginning God created the heavens and the earth.',
-    reference: 'Genesis 1:1',
-    book: 'Genesis',
-    chapter: 1,
-    rashi: 'בראשית ברא. אין המקרא הזה אומר אלא דרשני, כמה שדרשו רבותינו ז"ל בשביל התורה שנקראת ראשית ובשביל ישראל שנקראו ראשית.'
-  },
-  {
-    id: 'gen-1-2',
-    number: 2,
-    hebrew: 'וְהָאָרֶץ הָיְתָה תֹהוּ וָבֹהוּ וְחֹשֶׁךְ עַל־פְּנֵי תְהוֹם וְרוּחַ אֱלֹהִים מְרַחֶפֶת עַל־פְּנֵי הַמָּיִם׃',
-    english: 'Now the earth was unformed and void, and darkness was upon the face of the deep; and the spirit of God hovered over the face of the waters.',
-    reference: 'Genesis 1:2',
-    book: 'Genesis',
-    chapter: 1,
-    rashi: 'תהו ובהו. תהו לשון תמה, שאדם תוהה ומשתומם על בהו שבה.'
-  },
-  {
     id: 'kings2-1-8',
     number: 8,
-    hebrew: 'וַיֹּאמְרוּ אֵלָיו אִישׁ בַּעַל שֵׂעָר וְאֵזוֹר עוֹר אָזוּר בְּמָתְנָיו וַיֹּאמַר אֵליָּה הַתִּשְׁבִּי הוּא׃',
+    hebrew: 'וַיֹּאמְרוּ אֵלָיו אִישׁ בַּעַל שֵׂעָר וְאֵזוֹר עוֹר אָזוּר בְּמָתְנָיו וַיֹּאמַר אֵלִיָּה הַתִּשְׁבִּי הוּא׃',
     english: 'And they answered him: "He was a hairy man, and girt with a girdle of leather about his loins." And he said: "It is Elijah the Tishbite."',
     reference: 'II Kings 1:8',
     book: 'II Kings',

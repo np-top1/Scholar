@@ -1,48 +1,67 @@
 import React, { useState } from 'react';
-import { motion } from 'motion/react';
-import { User, Mail, Shield, CreditCard, LogOut, Camera, History, Bookmark } from 'lucide-react';
+import { User, Mail, Shield, CreditCard, LogOut, Camera, History, Bookmark, ChevronRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
 
 export const Account: React.FC = () => {
   const [name, setName] = useState('Nathan Pardo');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [location, setLocation] = useState('');
+  const [toast, setToast] = useState<string | null>(null);
+
+  const showToast = (message: string) => {
+    setToast(message);
+    setTimeout(() => setToast(null), 3000);
+  };
 
   const handleUpdate = () => {
-    // In a real app, this would call an API
     console.log('Updating profile:', { name, email, phone, location });
-    alert('Profile updated successfully!');
+    showToast('Profile updated successfully!');
   };
 
   const handleSignOut = () => {
     if (confirm('Are you sure you want to sign out?')) {
       console.log('Signing out...');
-      // Reset state or redirect
+      showToast('Signed out successfully!');
     }
   };
 
   const handleManagePlan = () => {
-    alert('Redirecting to billing portal...');
+    showToast('Redirecting to billing portal...');
   };
 
   const handleViewActivity = () => {
-    alert('Loading full activity history...');
+    showToast('Loading full activity history...');
   };
 
   const handleSavedItemClick = (item: any) => {
-    alert(`Opening saved item: ${item.title}`);
+    showToast(`Opening saved item: ${item.title}`);
   };
 
   const handleUploadPhoto = () => {
-    alert('Opening file picker for profile photo...');
+    showToast('Opening file picker for profile photo...');
   };
 
   return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="py-6 px-7 max-w-[74rem] mx-auto space-y-10 pb-32"
+      className="py-6 px-7 max-w-[74rem] mx-auto space-y-10 pb-32 relative"
     >
+      {/* Toast Notification */}
+      <AnimatePresence>
+        {toast && (
+          <motion.div
+            initial={{ opacity: 0, y: 50, x: '-50%' }}
+            animate={{ opacity: 1, y: 0, x: '-50%' }}
+            exit={{ opacity: 0, y: 20, x: '-50%' }}
+            className="fixed bottom-32 left-1/2 z-[100] bg-primary text-white px-6 py-3 rounded-full shadow-s3 text-[0.8rem] font-bold flex items-center gap-3"
+          >
+            <div className="w-2 h-2 rounded-full bg-secondary animate-pulse" />
+            {toast}
+          </motion.div>
+        )}
+      </AnimatePresence>
       <div className="mb-6">
         <h2 className="font-headline text-[1.65rem] font-bold text-primary mb-1">My Account</h2>
         <p className="text-[0.78rem] text-on-surface-variant">Manage your personal information, security, and subscription.</p>
@@ -172,10 +191,10 @@ export const Account: React.FC = () => {
             </h4>
             <div className="space-y-4">
               {[
-                { action: 'Watched Shiur', target: 'Bereshit: The Beginning', time: '2 hours ago' },
-                { action: 'Added Note', target: 'Genesis 1:1 Analysis', time: '5 hours ago' },
-                { action: 'Completed Quiz', target: 'Hebrew Roots I', time: 'Yesterday' },
-                { action: 'Saved Verse', target: 'Tehillim 27:4', time: '2 days ago' },
+                { action: 'Watched Shiur', target: 'Elijah: The Fiery Ascent', time: '2 hours ago' },
+                { action: 'Added Note', target: 'II Kings 2:11 Analysis', time: '5 hours ago' },
+                { action: 'Completed Quiz', target: 'Prophetic Succession', time: 'Yesterday' },
+                { action: 'Saved Verse', target: 'II Kings 1:8', time: '2 days ago' },
               ].map((item, idx) => (
                 <div key={idx} className="flex gap-3">
                   <div className="w-1.5 h-1.5 rounded-full bg-secondary mt-1.5 shrink-0"></div>
@@ -202,9 +221,9 @@ export const Account: React.FC = () => {
             </h4>
             <div className="space-y-3">
               {[
-                { title: 'The Concept of Ruach', type: 'Shiur' },
-                { title: 'Creation Narrative', type: 'Study List' },
-                { title: 'Isaiah 45:18', type: 'Verse' },
+                { title: 'The Chariot of Fire', type: 'Shiur' },
+                { title: 'Elijah vs Ahaziah', type: 'Study List' },
+                { title: 'II Kings 2:12', type: 'Verse' },
               ].map((item, idx) => (
                 <div 
                   key={idx} 
@@ -225,10 +244,3 @@ export const Account: React.FC = () => {
     </motion.div>
   );
 };
-
-// Helper component for chevron
-const ChevronRight = ({ className }: { className?: string }) => (
-  <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-  </svg>
-);

@@ -1,8 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { User, Mail, Shield, CreditCard, LogOut, Camera, History, Bookmark } from 'lucide-react';
 
 export const Account: React.FC = () => {
+  const [name, setName] = useState('Nathan Pardo');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [location, setLocation] = useState('');
+
+  const handleUpdate = () => {
+    // In a real app, this would call an API
+    console.log('Updating profile:', { name, email, phone, location });
+    alert('Profile updated successfully!');
+  };
+
   return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
@@ -27,8 +38,8 @@ export const Account: React.FC = () => {
               </button>
             </div>
             <div className="text-center md:text-left flex-1">
-              <h3 className="font-headline text-[1.8rem] font-bold text-primary">Nathan Pardo</h3>
-              <p className="text-on-surface-variant text-[0.9rem] mb-4">natpardo111@gmail.com</p>
+              <h3 className="font-headline text-[1.8rem] font-bold text-primary">{name || 'User Name'}</h3>
+              <p className="text-on-surface-variant text-[0.9rem] mb-4">{email || 'No email provided'}</p>
               <div className="flex flex-wrap justify-center md:justify-start gap-3">
                 <span className="px-3 py-1 bg-secondary/15 text-secondary text-[0.6rem] font-bold uppercase tracking-wider rounded-[2px]">Premium Member</span>
                 <span className="px-3 py-1 bg-primary/10 text-primary text-[0.6rem] font-bold uppercase tracking-wider rounded-[2px]">Joined Feb 2024</span>
@@ -49,23 +60,49 @@ export const Account: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="text-[0.65rem] font-bold text-secondary uppercase tracking-wider block mb-1.5">Full Name</label>
-                <input type="text" defaultValue="Nathan Pardo" className="w-full bg-surface-container-low border border-outline-variant rounded-[4px] px-3 py-2 text-[0.85rem] text-primary outline-none focus:border-secondary" />
+                <input 
+                  type="text" 
+                  value={name} 
+                  onChange={(e) => setName(e.target.value)}
+                  className="w-full bg-surface-container-low border border-outline-variant rounded-[4px] px-3 py-2 text-[0.85rem] text-primary outline-none focus:border-secondary" 
+                />
               </div>
               <div>
                 <label className="text-[0.65rem] font-bold text-secondary uppercase tracking-wider block mb-1.5">Email Address</label>
-                <input type="email" defaultValue="natpardo111@gmail.com" className="w-full bg-surface-container-low border border-outline-variant rounded-[4px] px-3 py-2 text-[0.85rem] text-primary outline-none focus:border-secondary" />
+                <input 
+                  type="email" 
+                  value={email} 
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email"
+                  className="w-full bg-surface-container-low border border-outline-variant rounded-[4px] px-3 py-2 text-[0.85rem] text-primary outline-none focus:border-secondary" 
+                />
               </div>
               <div>
                 <label className="text-[0.65rem] font-bold text-secondary uppercase tracking-wider block mb-1.5">Phone Number</label>
-                <input type="tel" placeholder="+1 (555) 000-0000" className="w-full bg-surface-container-low border border-outline-variant rounded-[4px] px-3 py-2 text-[0.85rem] text-primary outline-none focus:border-secondary" />
+                <input 
+                  type="tel" 
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  placeholder="+1 (555) 000-0000" 
+                  className="w-full bg-surface-container-low border border-outline-variant rounded-[4px] px-3 py-2 text-[0.85rem] text-primary outline-none focus:border-secondary" 
+                />
               </div>
               <div>
                 <label className="text-[0.65rem] font-bold text-secondary uppercase tracking-wider block mb-1.5">Location</label>
-                <input type="text" placeholder="City, Country" className="w-full bg-surface-container-low border border-outline-variant rounded-[4px] px-3 py-2 text-[0.85rem] text-primary outline-none focus:border-secondary" />
+                <input 
+                  type="text" 
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
+                  placeholder="City, Country" 
+                  className="w-full bg-surface-container-low border border-outline-variant rounded-[4px] px-3 py-2 text-[0.85rem] text-primary outline-none focus:border-secondary" 
+                />
               </div>
             </div>
             <div className="mt-8 flex justify-end">
-              <button className="px-6 py-2 bg-primary text-white text-[0.7rem] font-bold uppercase tracking-widest rounded-[2px] shadow-s1 hover:bg-primary/90 transition-colors">
+              <button 
+                onClick={handleUpdate}
+                className="px-6 py-2 bg-primary text-white text-[0.7rem] font-bold uppercase tracking-widest rounded-[2px] shadow-s1 hover:bg-primary/90 transition-colors"
+              >
                 Update Profile
               </button>
             </div>

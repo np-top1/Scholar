@@ -14,6 +14,29 @@ export const Account: React.FC = () => {
     alert('Profile updated successfully!');
   };
 
+  const handleSignOut = () => {
+    if (confirm('Are you sure you want to sign out?')) {
+      console.log('Signing out...');
+      // Reset state or redirect
+    }
+  };
+
+  const handleManagePlan = () => {
+    alert('Redirecting to billing portal...');
+  };
+
+  const handleViewActivity = () => {
+    alert('Loading full activity history...');
+  };
+
+  const handleSavedItemClick = (item: any) => {
+    alert(`Opening saved item: ${item.title}`);
+  };
+
+  const handleUploadPhoto = () => {
+    alert('Opening file picker for profile photo...');
+  };
+
   return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
@@ -33,7 +56,10 @@ export const Account: React.FC = () => {
               <div className="w-32 h-32 rounded-full bg-secondary/10 border-2 border-secondary/20 flex items-center justify-center overflow-hidden">
                 <User className="w-16 h-16 text-secondary" />
               </div>
-              <button className="absolute bottom-0 right-0 w-9 h-9 bg-primary text-white rounded-full flex items-center justify-center shadow-s1 hover:bg-primary/90 transition-colors">
+              <button 
+                onClick={handleUploadPhoto}
+                className="absolute bottom-0 right-0 w-9 h-9 bg-primary text-white rounded-full flex items-center justify-center shadow-s1 hover:bg-primary/90 transition-colors"
+              >
                 <Camera className="w-4 h-4" />
               </button>
             </div>
@@ -45,7 +71,10 @@ export const Account: React.FC = () => {
                 <span className="px-3 py-1 bg-primary/10 text-primary text-[0.6rem] font-bold uppercase tracking-wider rounded-[2px]">Joined Feb 2024</span>
               </div>
             </div>
-            <button className="flex items-center gap-2 text-on-surface-variant hover:text-error transition-colors text-[0.75rem] font-bold uppercase tracking-widest">
+            <button 
+              onClick={handleSignOut}
+              className="flex items-center gap-2 text-on-surface-variant hover:text-error transition-colors text-[0.75rem] font-bold uppercase tracking-widest"
+            >
               <LogOut className="w-4 h-4" />
               Sign Out
             </button>
@@ -124,7 +153,10 @@ export const Account: React.FC = () => {
                   <p className="text-[0.7rem] text-on-surface-variant">Next billing date: Feb 12, 2025</p>
                 </div>
               </div>
-              <button className="text-secondary text-[0.65rem] font-bold uppercase tracking-widest hover:underline">
+              <button 
+                onClick={handleManagePlan}
+                className="text-secondary text-[0.65rem] font-bold uppercase tracking-widest hover:underline"
+              >
                 Manage Plan
               </button>
             </div>
@@ -155,7 +187,10 @@ export const Account: React.FC = () => {
                 </div>
               ))}
             </div>
-            <button className="w-full mt-6 py-2 border border-outline-variant text-on-surface-variant text-[0.6rem] font-bold uppercase tracking-widest rounded-[2px] hover:bg-surface-container-low transition-colors">
+            <button 
+              onClick={handleViewActivity}
+              className="w-full mt-6 py-2 border border-outline-variant text-on-surface-variant text-[0.6rem] font-bold uppercase tracking-widest rounded-[2px] hover:bg-surface-container-low transition-colors"
+            >
               View All Activity
             </button>
           </section>
@@ -171,7 +206,11 @@ export const Account: React.FC = () => {
                 { title: 'Creation Narrative', type: 'Study List' },
                 { title: 'Isaiah 45:18', type: 'Verse' },
               ].map((item, idx) => (
-                <div key={idx} className="p-3 bg-surface-container-low/50 rounded border border-outline-variant/40 flex justify-between items-center group cursor-pointer hover:border-secondary/30 transition-colors">
+                <div 
+                  key={idx} 
+                  onClick={() => handleSavedItemClick(item)}
+                  className="p-3 bg-surface-container-low/50 rounded border border-outline-variant/40 flex justify-between items-center group cursor-pointer hover:border-secondary/30 transition-colors"
+                >
                   <div>
                     <p className="text-[0.78rem] font-bold text-primary group-hover:text-secondary transition-colors">{item.title}</p>
                     <p className="text-[0.6rem] text-on-surface-variant uppercase tracking-tight">{item.type}</p>

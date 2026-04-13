@@ -10,11 +10,12 @@ interface TanakhBrowserProps {
 }
 
 export const TanakhBrowser: React.FC<TanakhBrowserProps> = ({ onPlayLesson, activeLesson }) => {
+  const [selectedChapter, setSelectedChapter] = React.useState<number | null>(null);
   const chapters = ['א', 'ב', 'ג', 'ד', 'ה', 'ו', 'ז', 'ח', 'ט', 'י'];
   
   // Use active lesson context if available, otherwise default to II Kings
   const currentBook = activeLesson?.book || 'II Kings';
-  const currentChapter = activeLesson?.chapter || 1;
+  const currentChapter = selectedChapter || activeLesson?.chapter || 1;
   const currentHebrewName = 'מְלָכִים ב';
 
   const filteredVerses = VERSES.filter(v => v.book === currentBook && v.chapter === currentChapter);
@@ -47,18 +48,23 @@ export const TanakhBrowser: React.FC<TanakhBrowserProps> = ({ onPlayLesson, acti
         </h3>
         
         <div className="flex gap-2 mb-6 flex-wrap">
-          {chapters.map((ch, idx) => (
-            <button 
-              key={idx}
-              className={`w-9 h-9 rounded-full flex items-center justify-center font-headline text-[0.9rem] font-bold transition-all border ${
-                idx === 0 
-                  ? 'bg-secondary text-white border-secondary shadow-[0_2px_8px_rgba(119,90,25,0.26)]' 
-                  : 'border-outline-variant text-primary/45 hover:border-secondary hover:text-secondary'
-              }`}
-            >
-              {ch}
-            </button>
-          ))}
+          {chapters.map((ch, idx) => {
+            const chapterNum = idx + 1;
+            const isActive = currentChapter === chapterNum;
+            return (
+              <button 
+                key={idx}
+                onClick={() => setSelectedChapter(chapterNum)}
+                className={`w-9 h-9 rounded-full flex items-center justify-center font-headline text-[0.9rem] font-bold transition-all border ${
+                  isActive 
+                    ? 'bg-secondary text-white border-secondary shadow-[0_2px_8px_rgba(119,90,25,0.26)]' 
+                    : 'border-outline-variant text-primary/45 hover:border-secondary hover:text-secondary'
+                }`}
+              >
+                {ch}
+              </button>
+            );
+          })}
         </div>
 
         <div className="space-y-11">

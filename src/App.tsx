@@ -32,7 +32,7 @@ export default function App() {
       case 'support':
         return <Support />;
       case 'account':
-        return <Account />;
+        return <Account onScreenChange={setCurrentScreen} />;
       default:
         return <Dashboard onPlayLesson={setActiveLesson} activeLesson={activeLesson} />;
     }
@@ -47,7 +47,7 @@ export default function App() {
           {renderScreen()}
         </div>
         <MediaPlayer activeLesson={activeLesson} />
-        <Chat />
+        <Chat activeLesson={activeLesson} currentScreen={currentScreen} />
       </div>
     </div>
   );

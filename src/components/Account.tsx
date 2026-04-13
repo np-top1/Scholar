@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import { User, Mail, Shield, CreditCard, LogOut, Camera, History, Bookmark, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { Screen } from '../types';
 
-export const Account: React.FC = () => {
+interface AccountProps {
+  onScreenChange: (screen: Screen) => void;
+}
+
+export const Account: React.FC<AccountProps> = ({ onScreenChange }) => {
   const [name, setName] = useState('Nathan Pardo');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
@@ -23,19 +28,27 @@ export const Account: React.FC = () => {
     if (confirm('Are you sure you want to sign out?')) {
       console.log('Signing out...');
       showToast('Signed out successfully!');
+      // In a real app, you'd clear auth state here
     }
   };
 
   const handleManagePlan = () => {
-    showToast('Redirecting to billing portal...');
+    onScreenChange('settings');
+    showToast('Redirecting to subscription settings...');
   };
 
   const handleViewActivity = () => {
-    showToast('Loading full activity history...');
+    onScreenChange('dashboard');
+    showToast('Navigating to activity dashboard...');
   };
 
   const handleSavedItemClick = (item: any) => {
-    showToast(`Opening saved item: ${item.title}`);
+    if (item.type === 'Verse') {
+      onScreenChange('browser');
+    } else if (item.type === 'Shiur') {
+      onScreenChange('media');
+    }
+    showToast(`Opening ${item.type}: ${item.title}`);
   };
 
   const handleUploadPhoto = () => {

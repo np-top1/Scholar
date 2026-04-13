@@ -3,6 +3,8 @@ import { Send, Bot, User, Sparkles, X, Minimize2, Maximize2 } from 'lucide-react
 import { motion, AnimatePresence } from 'motion/react';
 import { GoogleGenAI } from '@google/genai';
 
+import { Screen, Lesson } from '../types';
+
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
 interface Message {
@@ -10,7 +12,12 @@ interface Message {
   content: string;
 }
 
-export const Chat: React.FC = () => {
+interface ChatProps {
+  activeLesson: Lesson | null;
+  currentScreen: Screen;
+}
+
+export const Chat: React.FC<ChatProps> = ({ activeLesson, currentScreen }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const [input, setInput] = useState('');
@@ -36,9 +43,13 @@ export const Chat: React.FC = () => {
     setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
     setIsLoading(true);
 
+    const contextInfo = activeLesson 
+      ? `The user is currently viewing the lesson: "${activeLesson.title}" which covers ${activeLesson.book || 'II Kings'} chapter ${activeLesson.chapter || 1}.`
+      : `The user is currently on the ${currentScreen} screen.`;
+
     try {
       const response = await ai.models.generateContent({
-        model: 'gemini-3-flash-preview',
+        model: 'gemini-2.0-flash-exp',
         contents: [
           ...messages.map(m => ({
             role: m.role,
@@ -47,7 +58,14 @@ export const Chat: React.FC = () => {
           { role: 'user', parts: [{ text: userMessage }] }
         ],
         config: {
-          systemInstruction: 'You are a Tanakh teacher specializing in the stories of Elijah the Prophet in II Kings. Answer in Hebrew or English as requested. Be scholarly yet accessible.',
+          systemInstruction: `You are a Tanakh teacher specializing in the stories of Elijah the Prophet in II Kings. 
+          Respond using a mixture of Hebrew and English (Code-switching). Use Hebrew for key terms, verses, and traditional concepts, and English for explanations and context. 
+          Be scholarly yet accessible.
+          
+          CURRENT CONTEXT: ${contextInfo}
+          
+          If the user asks a question, prioritize answering based on the current context (lesson or passage) they are viewing. 
+          If the question is general, answer normally but you can reference the current context if relevant.`,
         }
       });
 
@@ -95,7 +113,19 @@ export const Chat: React.FC = () => {
                 </div>
                 <div>
                   <h3 className="text-white font-headline text-sm font-bold">עוזר לימוד AI</h3>
-                  {!isMinimized && <p className="text-white/40 text-[0.6rem] uppercase tracking-widest">Tanakh Assistant</p>}
+                  {!isMinimized && (
+                    <div className="flex items-center gap-1.5">
+                      <p className="text-white/40 text-[0.6rem] uppercase tracking-widest">Tanakh Assistant</p>
+                      {activeLesson && (
+                        <>
+                          <span className="w-1 h-1 rounded-full bg-secondary/40" />
+                          <p className="text-secondary/80 text-[0.6rem] font-bold truncate max-w-[10rem]">
+                            Context: {activeLesson.title}
+                          </p>
+                        </>
+                      )}
+                    </div>
+                  )}
                 </div>
               </div>
               <div className="flex items-center gap-2">

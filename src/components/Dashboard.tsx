@@ -39,14 +39,14 @@ export const Dashboard: React.FC<DashboardProps> = ({ onPlayLesson }) => {
             <div className="relative z-10 space-y-6">
               <div className="flex justify-between items-center">
                 <span className="bg-secondary text-white text-[0.55rem] font-bold uppercase tracking-[0.14em] px-2.5 py-0.5 rounded-[2px]">Daily Verse</span>
-                <span className="font-headline text-[0.95rem] font-bold text-primary">Tehillim 27:4</span>
+                <span className="font-headline text-[0.95rem] font-bold text-primary">II Kings 1:8</span>
               </div>
               <div className="space-y-4">
                 <p className="hebrew-text text-[1.75rem] font-bold text-primary leading-[1.7] text-right">
-                  אַחַת שָׁאַלְתִּי מֵאֵת־יְהוָה אוֹתָהּ אֲבַקֵּשׁ שִׁבְתִּי בְּבֵית־יְהוָה כָּל־יְמֵי חַיַּי
+                  וַיֹּאמְרוּ אֵלָיו אִישׁ בַּעַל שֵׂעָר וְאֵזוֹר עוֹר אָזוּר בְּמָתְנָיו וַיֹּאמַר אֵלִיָּה הַתִּשְׁבִּי הוּא׃
                 </p>
                 <p className="text-[0.9rem] font-body text-on-surface-variant italic leading-[1.7] pl-10 relative before:content-[''] before:absolute before:left-0 before:top-[0.52rem] before:w-[1.6rem] before:h-[2px] before:bg-secondary">
-                  "One thing I have asked of the Lord — that I may dwell in the house of the Lord all the days of my life."
+                  "He was a hairy man, and girt with a girdle of leather about his loins." And he said: "It is Elijah the Tishbite."
                 </p>
               </div>
               <div className="flex gap-5 pt-4 border-t border-outline-variant">
@@ -141,8 +141,8 @@ export const Dashboard: React.FC<DashboardProps> = ({ onPlayLesson }) => {
         </h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {[
-            { label: 'Genesis 1', title: 'Bereshit', icon: BookOpen },
-            { label: 'Tehillim 27', title: 'Daily Psalm', icon: Library },
+            { label: 'II Kings 1', title: 'Elijah & Ahaziah', icon: BookOpen },
+            { label: 'II Kings 2', title: 'The Fiery Chariot', icon: Library },
             { label: 'Video', title: 'Shiur א׳', icon: Youtube, lesson: LESSONS[0] },
             { label: 'Saved', title: 'Study Notes', icon: Bookmark },
           ].map((item, idx) => (

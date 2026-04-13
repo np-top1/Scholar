@@ -2,127 +2,88 @@ import { Verse, Lesson, Note, Word } from './types';
 
 export const VERSES: Verse[] = [
   {
-    id: 'gen-1-1',
-    number: 1,
-    hebrew: 'בְּרֵאשִׁית בָּרָא אֱלֹהִים אֵת הַשָּׁמַיִם וְאֵת הָאָרֶץ׃',
-    english: 'In the beginning God created the heavens and the earth.',
-    reference: 'Genesis 1:1',
-    book: 'Genesis',
-    chapter: 1
+    id: 'kings2-1-8',
+    number: 8,
+    hebrew: 'וַיֹּאמְרוּ אֵלָיו אִישׁ בַּעַל שֵׂעָר וְאֵזוֹר עוֹר אָזוּר בְּמָתְנָיו וַיֹּאמַר אֵלִיָּה הַתִּשְׁבִּי הוּא׃',
+    english: 'And they answered him: "He was a hairy man, and girt with a girdle of leather about his loins." And he said: "It is Elijah the Tishbite."',
+    reference: 'II Kings 1:8',
+    book: 'II Kings',
+    chapter: 1,
+    rashi: 'איש בעל שער. מלובש באדרת שער: ואזור עור. חגור בחגורה של עור:'
   },
   {
-    id: 'gen-1-2',
-    number: 2,
-    hebrew: 'וְהָאָרֶץ הָיְתָה תֹהוּ וָבֹהוּ וְחֹשֶׁךְ עַל־פְּנֵי תְהוֹם וְרוּחַ אֱלֹהִים מְרַחֶפֶת עַל־פְּנֵי הַמָּיִם׃',
-    english: 'Now the earth was unformed and void, and darkness was upon the face of the deep; and the spirit of God hovered over the face of the waters.',
-    reference: 'Genesis 1:2',
-    book: 'Genesis',
-    chapter: 1
+    id: 'kings2-2-11',
+    number: 11,
+    hebrew: 'וַיְהִי הֵמָּה הֹלְכִים הָלוֹךְ וְדַבֵּר וְהִנֵּה רֶכֶב־אֵשׁ וְסוּסֵי אֵשׁ וַיַּפְרִדוּ בֵּין שְׁנֵיהֶם וַיַּעַל אֵלִיָּהוּ בַּסְעָרָה הַשָּׁמָיִם׃',
+    english: 'And it came to pass, as they still went on, and talked, that, behold, there appeared a chariot of fire, and horses of fire, which parted them both asunder; and Elijah went up by a whirlwind into heaven.',
+    reference: 'II Kings 2:11',
+    book: 'II Kings',
+    chapter: 2,
+    rashi: 'רכב אש וסוסי אש. מלאכים נדמו לו כסוסים של אש וכרכב של אש:'
   },
   {
-    id: 'gen-1-3',
-    number: 3,
-    hebrew: 'וַיֹּאמֶר אֱלֹהִים יְהִי אוֹר וַיְהִי־אוֹר׃',
-    english: 'And God said: "Let there be light." And there was light.',
-    reference: 'Genesis 1:3',
-    book: 'Genesis',
-    chapter: 1
-  },
-  {
-    id: 'kings-20-1',
-    number: 1,
-    hebrew: 'וּבֶן־הֲדַד מֶלֶךְ־אֲרָם קָבַץ אֶת־כָּל־חֵילוֹ וּשְׁלֹשִׁים וּשְׁנַיִם מֶלֶךְ אִתּוֹ וְסוּס וָרֶכֶב וַיַּעַל וַיָּצַר עַל־שֹׁמְרוֹן וַיִּלָּחֶם בָּהּ׃',
-    english: 'And Ben-hadad the king of Syria gathered all his host together: and there were thirty and two kings with him, and horses, and chariots: and he went up and besieged Samaria, and warred against it.',
-    reference: '1 Kings 20:1',
-    book: '1 Kings',
-    chapter: 20
-  },
-  {
-    id: 'kings-20-2',
-    number: 2,
-    hebrew: 'וַיִּשְׁלַח מַלְאָכִים אֶל־אַחְאָב מֶלֶךְ־יִשְׂרָאֵל הָעִירָה׃',
-    english: 'And he sent messengers to Ahab king of Israel into the city.',
-    reference: '1 Kings 20:2',
-    book: '1 Kings',
-    chapter: 20
+    id: 'kings2-2-12',
+    number: 12,
+    hebrew: 'וֶאֱלִישָׁע רֹאֶה וְהוּא מְצַעֵק אָבִי אָבִי רֶכֶב יִשְׂרָאֵל וּפָרָשָׁיו וְלֹא רָאָהוּ עוֹד וַיַּחֲזֵק בִּבְגָדָיו וַיִּקְרָעֵם לִשְׁנֵי קְרָעִים׃',
+    english: 'And Elisha saw it, and he cried: "My father, my father, the chariots of Israel and the horsemen thereof!" And he saw him no more; and he took hold of his own clothes, and rent them in two pieces.',
+    reference: 'II Kings 2:12',
+    book: 'II Kings',
+    chapter: 2,
+    rashi: 'רכב ישראל ופרשיו. שהיה טוב לישראל בתפלתו יותר מרכב ופרשים:'
   }
 ];
 
 export const LESSONS: Lesson[] = [
   {
     id: 'lesson-1',
-    title: 'שיעור א׳ — Tanakh Lesson 1',
-    description: 'A comprehensive introduction to the opening of Bereshit, exploring the linguistic roots of creation.',
-    duration: '59:40',
+    title: 'אליהו הנביא — Elijah the Prophet',
+    description: 'An introduction to the fiery prophet Elijah and his confrontation with King Ahaziah.',
+    duration: '45:20',
     thumbnail: 'https://img.youtube.com/vi/a-h60-owwSg/maxresdefault.jpg',
     author: 'Rabbi Ariel Azaria',
     youtubeId: 'a-h60-owwSg',
-    book: 'Genesis',
+    book: 'II Kings',
     chapter: 1
   },
   {
     id: 'lesson-2',
-    title: 'שיעור ב׳ — Tanakh Lesson 2',
-    description: 'An exploration of the second day of creation and the separation of the waters.',
-    duration: '15:20',
+    title: 'עליית אליהו בסערה — Elijah\'s Ascent',
+    description: 'Exploring the mystical departure of Elijah in a chariot of fire and the transition to Elisha.',
+    duration: '52:15',
     thumbnail: 'https://img.youtube.com/vi/Wk561CcVyxQ/maxresdefault.jpg',
     author: 'Rabbi Ariel Azaria',
-    youtubeId: 'Wk561CcVyxQ'
-  },
-  {
-    id: 'lesson-3',
-    title: 'שיעור ג׳ — Tanakh Lesson 3',
-    description: 'Deep dive into the creation of life and the botanical wonders of the third day.',
-    duration: '12:45',
-    thumbnail: 'https://img.youtube.com/vi/M4TEukZCpZM/maxresdefault.jpg',
-    author: 'Rabbi Ariel Azaria',
-    youtubeId: 'M4TEukZCpZM',
-    book: '1 Kings',
-    chapter: 20
-  },
-  {
-    id: 'lesson-4',
-    title: 'שיעור ד׳ — Tanakh Lesson 4',
-    description: 'The celestial bodies and the establishment of time and seasons.',
-    duration: '08:30',
-    thumbnail: 'https://img.youtube.com/vi/fkdby9nGq9Q/maxresdefault.jpg',
-    author: 'Rabbi Ariel Azaria',
-    youtubeId: 'fkdby9nGq9Q'
+    youtubeId: 'Wk561CcVyxQ',
+    book: 'II Kings',
+    chapter: 2
   }
 ];
 
 export const WORDS: Word[] = [
-  {heb:'בְּרֵאשִׁית', trans:'Bereshit', mean:'In the beginning', root:'ר-א-ש', gram:'Noun, feminine, singular, construct state with prefix ב (in/at)', note:'Rashi notes this is not an absolute beginning but a relative one — "in a beginning of". The letter Bet is the second letter of the aleph-bet, teaching that there is mystery before creation.'},
-  {heb:'בָּרָא', trans:'Bara', mean:'He created', root:'ב-ר-א', gram:'Verb, Qal binyan, perfect tense, 3rd person masculine singular', note:'Bara denotes creation ex nihilo — from nothing. This root is used exclusively with God as subject in the Tanakh, distinguishing divine creation from human making (asah/yatzar).'},
-  {heb:'אֱלֹהִים', trans:'Elohim', mean:'God', root:'א-ל-ה', gram:'Noun, masculine, plural form — but takes singular verb (Bara)', note:'The plural form Elohim with a singular verb is the classic proof-text for the Jewish understanding of divine unity. The plurality expresses majesty, not multiplicity.'},
-  {heb:'אֵת', trans:'Et', mean:'Direct object marker', root:'א-ת', gram:'Particle, marks the definite direct object', note:'The untranslatable את. Kabbalistic tradition (Sefer Yetzirah) reads it as encompassing all 22 letters from Aleph to Tav — hinting that the entire Torah is encoded in creation.'},
-  {heb:'הַשָּׁמַיִם', trans:'HaShamayim', mean:'The heavens', root:'ש-מ-ם', gram:'Noun, masculine, dual/plural with definite article', note:'Shamayim is grammatically dual in form, suggesting two heavens. The word may derive from esh (fire) + mayim (water) — fire and water combined at creation.'},
-  {heb:'הָאָרֶץ', trans:'HaAretz', mean:'The earth', root:'א-ר-צ', gram:'Noun, feminine, singular with definite article', note:'Eretz is the physical earth but also the Land of Israel throughout Tanakh. The juxtaposition shamayim/aretz (heaven/earth) is a merism encompassing all of existence.'},
+  {heb:'אֵלִיָּה', trans:'Eliyah', mean:'Elijah', root:'א-ל-י-ה', gram:'Proper Noun, masculine singular', note:'The name means "My God is YHVH". Elijah represents the uncompromising zeal for the unity of God.'},
+  {heb:'הַתִּשְׁבִּי', trans:'HaTishbi', mean:'The Tishbite', root:'ת-ש-ב', gram:'Adjective with definite article', note:'Likely refers to his place of origin, Tishbe in Gilead, though some interpret it as "the settler" or "the restorer".'},
+  {heb:'רֶכֶב־אֵשׁ', trans:'Rechev-Esh', mean:'Chariot of fire', root:'ר-כ-ב / א-ש', gram:'Noun construct state', note:'Fire symbolizes the divine presence and the transformative power of Elijah\'s prophecy.'},
+  {heb:'בַּסְעָרָה', trans:'BaSe\'arah', mean:'In a whirlwind', root:'ס-ע-ר', gram:'Noun with prefix ב (in) and definite article', note:'A whirlwind often accompanies divine revelation or transition in the Tanakh.'},
+  {heb:'אָבִי אָבִי', trans:'Avi Avi', mean:'My father, my father', root:'א-ב', gram:'Noun with 1st person suffix, repeated', note:'Elisha\'s cry recognizes Elijah as his spiritual father and the source of his prophetic authority.'},
+  {heb:'פָּרָשָׁיו', trans:'Parashav', mean:'His horsemen', root:'פ-ר-ש', gram:'Noun with 3rd person masculine singular suffix', note:'Refers to the spiritual defense of Israel, which Elijah provided through his prayer and presence.'},
 ];
 
 export const NOTES: Note[] = [
   {
     id: 'note-1',
     timestamp: '04:22',
-    content: '"Compare this phrasing to Enuma Elish \'When on high\'... the structural similarity suggests a direct polemic."',
+    content: '"The hairy mantle of Elijah is a sign of his ascetic life and his separation from the corrupt court of Ahab."',
     lessonId: 'lesson-1'
   },
   {
     id: 'note-2',
-    concept: 'Verse Concept',
-    content: 'Look into the gematria of Bereshit (913).',
-    lessonId: 'lesson-1'
+    concept: 'Prophetic Succession',
+    content: 'Elisha asking for a "double portion" of Elijah\'s spirit is a request to be recognized as the primary heir, similar to the firstborn\'s inheritance.',
+    lessonId: 'lesson-2'
   },
   {
     id: 'note-3',
-    timestamp: '02:15',
-    content: 'The mention of Ben-hadad here aligns with the historical records of the Aramaean expansion.',
-    lessonId: 'lesson-3'
-  },
-  {
-    id: 'note-4',
-    concept: 'Historical Context',
-    content: 'Samaria was the capital of the Northern Kingdom of Israel at this time.',
-    lessonId: 'lesson-3'
+    timestamp: '12:15',
+    content: 'The chariot of fire represents the divine merkavah, showing that Elijah is being taken directly into the heavenly realm.',
+    lessonId: 'lesson-2'
   }
 ];

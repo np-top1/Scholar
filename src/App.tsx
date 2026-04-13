@@ -9,6 +9,7 @@ import { MediaLibrary } from './components/MediaLibrary';
 import { Settings } from './components/Settings';
 import { Support } from './components/Support';
 import { Account } from './components/Account';
+import { Chat } from './components/Chat';
 import { Screen, Lesson } from './types';
 import { LESSONS } from './constants';
 
@@ -46,6 +47,7 @@ export default function App() {
           {renderScreen()}
         </div>
         <MediaPlayer activeLesson={activeLesson} />
+        <Chat />
       </div>
     </div>
   );

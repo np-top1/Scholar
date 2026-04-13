@@ -50,6 +50,14 @@ export const StudyMode: React.FC<StudyModeProps> = ({ onPlayLesson, activeLesson
               <div className="flex justify-end gap-5 text-left">
                 <div className="max-w-[32rem]">
                   <p className="text-[1.1rem] font-body text-white/85 italic leading-relaxed">"{activeVerse.english}"</p>
+                  {activeVerse.rashi && (
+                    <div className="mt-4 p-4 bg-white/5 border-r-2 border-secondary/40 rounded-l-lg text-right">
+                      <p className="text-[0.56rem] font-bold text-secondary uppercase tracking-[0.15em] mb-1.5">רש"י · Rashi</p>
+                      <p className="hebrew-text text-[1rem] text-white/90 leading-relaxed">
+                        {activeVerse.rashi}
+                      </p>
+                    </div>
+                  )}
                   <div className="mt-4 flex gap-2.5">
                     <span className="bg-white/10 text-white/70 px-2.5 py-0.5 rounded-[2px] text-[0.56rem] font-bold uppercase tracking-wider">JPS 1917</span>
                     <span className="bg-white/10 text-white/70 px-2.5 py-0.5 rounded-[2px] text-[0.56rem] font-bold uppercase tracking-wider">{activeVerse.reference}</span>
@@ -92,8 +100,8 @@ export const StudyMode: React.FC<StudyModeProps> = ({ onPlayLesson, activeLesson
                 </h4>
                 <div className="space-y-3">
                   {[
-                    { ref: 'Psalm 33:6', text: 'By the word of the Lord were the heavens made...' },
-                    { ref: 'Isaiah 45:18', text: 'For thus saith the Lord that created the heavens...' },
+                    { ref: 'Malachi 3:23', text: 'Behold, I will send you Elijah the prophet before the coming of the great and terrible day of the Lord.' },
+                    { ref: 'I Kings 18:46', text: 'And the hand of the Lord was on Elijah; and he girded up his loins, and ran before Ahab to the entrance of Jezreel.' },
                   ].map((item, idx) => (
                     <div key={idx} className="p-4 bg-surface border border-outline-variant rounded-lg hover:border-secondary/30 transition-colors cursor-pointer group shadow-s0">
                       <p className="text-[0.56rem] font-bold text-secondary uppercase mb-1.5 tracking-[0.1em]">{item.ref}</p>

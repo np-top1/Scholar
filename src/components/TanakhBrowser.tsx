@@ -90,6 +90,14 @@ export const TanakhBrowser: React.FC<TanakhBrowserProps> = ({ onPlayLesson, acti
                 <p className={`mt-2 text-[0.85rem] font-body text-on-surface-variant leading-relaxed italic direction-ltr ${verse.number === 2 ? '' : 'border-r-2 border-secondary/10 pr-3'}`}>
                   {verse.english}
                 </p>
+                {verse.rashi && (
+                  <div className="mt-4 p-4 bg-surface-container-low/40 border-r-2 border-secondary/20 rounded-l-lg">
+                    <p className="text-[0.65rem] font-bold text-secondary uppercase tracking-[0.15em] mb-1.5">רש"י · Rashi</p>
+                    <p className="hebrew-text text-[1.1rem] text-primary/80 leading-relaxed text-right">
+                      {verse.rashi}
+                    </p>
+                  </div>
+                )}
               </div>
             ))}
           </div>

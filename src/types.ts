@@ -17,6 +17,7 @@ export interface Verse {
   reference: string;
   book: string;
   chapter: number;
+  rashi?: string;
 }
 
 export interface Lesson {

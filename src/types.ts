@@ -1,4 +1,4 @@
-export type Screen = 'dashboard' | 'browser' | 'study' | 'media' | 'settings' | 'support' | 'account';
+export type Screen = 'dashboard' | 'browser' | 'study' | 'media' | 'settings' | 'support' | 'account' | 'signup';
 
 export interface Word {
   heb: string;

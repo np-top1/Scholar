@@ -98,15 +98,15 @@ export const Chat: React.FC<ChatProps> = ({ activeLesson, currentScreen }) => {
     <div className="fixed bottom-24 right-8 z-[60]">
       <AnimatePresence>
         {!isOpen && (
-          <motion.button
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0, opacity: 0 }}
-            onClick={() => setIsOpen(true)}
-            className="w-14 h-14 bg-primary text-white rounded-full flex items-center justify-center shadow-s3 hover:bg-primary/90 transition-all group"
-          >
-            <Sparkles className="w-6 h-6 text-secondary group-hover:scale-110 transition-transform" />
-          </motion.button>
+            <motion.button
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0, opacity: 0 }}
+              onClick={() => setIsOpen(true)}
+              className="w-14 h-14 bg-primary text-on-primary rounded-full flex items-center justify-center shadow-s3 hover:bg-primary/90 transition-all group"
+            >
+              <Sparkles className="w-6 h-6 text-on-primary group-hover:scale-110 transition-transform" />
+            </motion.button>
         )}
       </AnimatePresence>
 
@@ -121,20 +121,20 @@ export const Chat: React.FC<ChatProps> = ({ activeLesson, currentScreen }) => {
             }`}
           >
             {/* Header */}
-            <div className="bg-primary p-4 flex items-center justify-between">
+                <div className="bg-primary p-4 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-secondary/20 flex items-center justify-center">
-                  <Bot className="w-5 h-5 text-secondary" />
+                <div className="w-8 h-8 rounded-full bg-on-primary/10 flex items-center justify-center">
+                  <Bot className="w-5 h-5 text-on-primary" />
                 </div>
                 <div>
-                  <h3 className="text-white font-headline text-sm font-bold">עוזר לימוד AI</h3>
+                  <h3 className="text-on-primary font-headline text-sm font-bold">עוזר לימוד AI</h3>
                   {!isMinimized && (
                     <div className="flex items-center gap-1.5">
-                      <p className="text-white/40 text-[0.6rem] uppercase tracking-widest">Tanakh Assistant</p>
+                      <p className="text-on-primary/40 text-[0.6rem] uppercase tracking-widest">Tanakh Assistant</p>
                       {activeLesson && (
                         <>
                           <span className="w-1 h-1 rounded-full bg-secondary/40" />
-                          <p className="text-secondary/80 text-[0.6rem] font-bold truncate max-w-[10rem]">
+                          <p className="text-secondary text-[0.6rem] font-bold truncate max-w-[10rem]">
                             Context: {activeLesson.title}
                           </p>
                         </>
@@ -146,13 +146,13 @@ export const Chat: React.FC<ChatProps> = ({ activeLesson, currentScreen }) => {
               <div className="flex items-center gap-2">
                 <button 
                   onClick={() => setIsMinimized(!isMinimized)}
-                  className="p-1.5 hover:bg-white/10 rounded-full text-white/60 transition-colors"
+                  className="p-1.5 hover:bg-on-primary/10 rounded-full text-on-primary/60 transition-colors"
                 >
                   {isMinimized ? <Maximize2 className="w-4 h-4" /> : <Minimize2 className="w-4 h-4" />}
                 </button>
                 <button 
                   onClick={() => setIsOpen(false)}
-                  className="p-1.5 hover:bg-white/10 rounded-full text-white/60 transition-colors"
+                  className="p-1.5 hover:bg-on-primary/10 rounded-full text-on-primary/60 transition-colors"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -166,15 +166,15 @@ export const Chat: React.FC<ChatProps> = ({ activeLesson, currentScreen }) => {
                   {messages.map((msg, idx) => (
                     <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                       <div className={`flex gap-2.5 max-w-[85%] ${msg.role === 'user' ? 'flex-row-reverse' : ''}`}>
-                        <div className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 mt-1 ${
-                          msg.role === 'user' ? 'bg-secondary text-white' : 'bg-primary text-secondary'
+                <div className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 mt-1 ${
+                          msg.role === 'user' ? 'bg-secondary text-on-secondary' : 'bg-primary text-on-primary'
                         }`}>
                           {msg.role === 'user' ? <User className="w-4 h-4" /> : <Bot className="w-4 h-4" />}
                         </div>
                         <div className={`p-3 rounded-lg text-[0.85rem] leading-relaxed ${
                           msg.role === 'user' 
-                            ? 'bg-secondary text-white rounded-tr-none' 
-                            : 'bg-white border border-outline-variant text-primary rounded-tl-none shadow-s0'
+                            ? 'bg-secondary text-on-secondary rounded-tr-none' 
+                            : 'bg-surface-container border border-outline-variant text-on-surface rounded-tl-none shadow-s0'
                         }`}>
                           {msg.content}
                         </div>
@@ -187,7 +187,7 @@ export const Chat: React.FC<ChatProps> = ({ activeLesson, currentScreen }) => {
                         <div className="w-7 h-7 rounded-full bg-primary text-secondary flex items-center justify-center animate-pulse">
                           <Bot className="w-4 h-4" />
                         </div>
-                        <div className="bg-white border border-outline-variant p-3 rounded-lg rounded-tl-none shadow-s0">
+                        <div className="bg-surface-container border border-outline-variant p-3 rounded-lg rounded-tl-none shadow-s0">
                           <div className="flex gap-1">
                             <div className="w-1.5 h-1.5 bg-secondary/40 rounded-full animate-bounce"></div>
                             <div className="w-1.5 h-1.5 bg-secondary/40 rounded-full animate-bounce [animation-delay:0.2s]"></div>
@@ -201,7 +201,7 @@ export const Chat: React.FC<ChatProps> = ({ activeLesson, currentScreen }) => {
                 </div>
 
                 {/* Input */}
-                <div className="p-4 bg-white border-t border-outline-variant">
+                <div className="p-4 bg-surface border-t border-outline-variant">
                   <div className="relative">
                     <input
                       type="text"
@@ -214,7 +214,7 @@ export const Chat: React.FC<ChatProps> = ({ activeLesson, currentScreen }) => {
                     <button
                       onClick={handleSend}
                       disabled={!input.trim() || isLoading}
-                      className="absolute right-2 top-1.5 p-1.5 bg-primary text-secondary rounded-md hover:bg-primary/90 transition-all disabled:opacity-50"
+                      className="absolute right-2 top-1.5 p-1.5 bg-primary text-on-primary rounded-md hover:bg-primary/90 transition-all disabled:opacity-50"
                     >
                       <Send className="w-4 h-4" />
                     </button>

@@ -36,7 +36,7 @@ export const MediaPlayer: React.FC<MediaPlayerProps> = ({ activeLesson }) => {
   };
 
   return (
-    <footer className={`fixed bottom-0 right-0 w-full lg:w-[calc(100%-16rem)] z-50 bg-primary text-white shadow-s3 transition-all duration-500 rounded-t-xl lg:rounded-t-none lg:rounded-tl-xl ${isExpanded ? 'h-[85vh]' : 'h-[4.5rem]'}`}>
+    <footer className={`fixed bottom-0 right-0 w-full lg:w-[calc(100%-16rem)] z-50 bg-primary text-on-primary shadow-s3 transition-all duration-500 rounded-t-xl lg:rounded-t-none lg:rounded-tl-xl ${isExpanded ? 'h-[85vh]' : 'h-[4.5rem]'}`}>
       {/* Expanded Video View */}
       {isExpanded && (
         <div className="absolute inset-0 p-6 lg:p-10 flex flex-col">
@@ -46,15 +46,15 @@ export const MediaPlayer: React.FC<MediaPlayerProps> = ({ activeLesson }) => {
                 <Youtube className="text-secondary w-6 h-6" />
               </div>
               <div>
-                <h2 className="font-headline text-[1.5rem] font-bold text-white leading-tight">{activeLesson.title}</h2>
+                <h2 className="font-headline text-[1.5rem] font-bold text-on-primary leading-tight">{activeLesson.title}</h2>
                 <p className="text-secondary font-bold text-[0.65rem] uppercase tracking-[0.15em] mt-1">אריאל עזריה · Shiur</p>
               </div>
             </div>
             <button 
               onClick={() => setIsExpanded(false)}
-              className="p-2 hover:bg-white/10 rounded-full transition-colors"
+              className="p-2 hover:bg-on-primary/10 rounded-full transition-colors"
             >
-              <X className="w-6 h-6" />
+              <X className="w-6 h-6 text-on-primary" />
             </button>
           </div>
           
@@ -81,7 +81,7 @@ export const MediaPlayer: React.FC<MediaPlayerProps> = ({ activeLesson }) => {
           </div>
           
           <div className="mt-6 max-w-3xl">
-            <p className="text-white/65 text-[0.9rem] leading-relaxed">
+            <p className="text-on-primary/65 text-[0.9rem] leading-relaxed">
               {activeLesson.description}
             </p>
           </div>
@@ -104,13 +104,13 @@ export const MediaPlayer: React.FC<MediaPlayerProps> = ({ activeLesson }) => {
             </div>
           </div>
           <div className="max-w-[12rem] lg:max-w-xs">
-            <p className="text-[0.85rem] font-bold truncate text-white">{activeLesson.title}</p>
-            <p className="text-[0.6rem] uppercase tracking-[0.12em] text-white/45 font-bold mt-0.5">אריאל עזריה · {activeLesson.duration}</p>
+            <p className="text-[0.85rem] font-bold truncate text-on-primary">{activeLesson.title}</p>
+            <p className="text-[0.6rem] uppercase tracking-[0.12em] text-on-primary/45 font-bold mt-0.5">אריאל עזריה · {activeLesson.duration}</p>
           </div>
         </div>
 
         <div className="flex items-center gap-6 lg:gap-10">
-          <button className="text-white/60 hover:text-secondary transition-colors">
+          <button className="text-on-primary/60 hover:text-secondary transition-colors">
             <SkipBack className="w-5 h-5" />
           </button>
           <button 
@@ -119,22 +119,22 @@ export const MediaPlayer: React.FC<MediaPlayerProps> = ({ activeLesson }) => {
           >
             {isPlaying ? <Pause className="w-9 h-9 fill-current" /> : <Play className="w-9 h-9 fill-current" />}
           </button>
-          <button className="text-white/60 hover:text-secondary transition-colors">
+          <button className="text-on-primary/60 hover:text-secondary transition-colors">
             <SkipForward className="w-5 h-5" />
           </button>
         </div>
 
-        <div className="hidden md:flex items-center gap-6 min-w-[14rem] justify-end">
+          <div className="hidden md:flex items-center gap-6 min-w-[14rem] justify-end">
           <div className="flex items-center gap-3">
-            <Volume2 className="w-4 h-4 text-white/40" />
-            <div className="w-20 h-[3px] bg-white/15 rounded-full overflow-hidden">
+            <Volume2 className="w-4 h-4 text-on-primary/40" />
+            <div className="w-20 h-[3px] bg-on-primary/15 rounded-full overflow-hidden">
               <div className="w-[45%] h-full bg-secondary"></div>
             </div>
           </div>
-          <div className="w-px h-5 bg-white/10 mx-1"></div>
+          <div className="w-px h-5 bg-on-primary/10 mx-1"></div>
           <button 
             onClick={() => setIsExpanded(!isExpanded)}
-            className="text-white/60 hover:text-secondary transition-colors"
+            className="text-on-primary/60 hover:text-secondary transition-colors"
           >
             <Maximize2 className="w-[18px] h-[18px]" />
           </button>

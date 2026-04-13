@@ -34,16 +34,16 @@ export const MediaLibrary: React.FC<MediaLibraryProps> = ({ onPlayLesson }) => {
           </div>
           <div className="relative z-10 max-w-2xl">
             <span className="text-secondary font-bold text-[0.56rem] uppercase tracking-[0.25em] mb-3 block">Featured Lesson</span>
-            <h2 className="font-headline text-[2.4rem] font-bold text-white mb-6 leading-[1.15]">{LESSONS[0].title}</h2>
+            <h2 className="font-headline text-[2.4rem] font-bold text-on-primary mb-6 leading-[1.15]">{LESSONS[0].title}</h2>
             <div className="flex gap-3.5">
               <button 
                 onClick={() => onPlayLesson(LESSONS[0])}
-                className="bg-secondary text-white px-7 py-2.5 rounded-[2px] font-bold text-[0.75rem] uppercase tracking-widest flex items-center gap-2 shadow-s1 hover:bg-secondary/90 transition-all active:scale-[0.98]"
+                className="bg-secondary text-on-secondary px-7 py-2.5 rounded-[2px] font-bold text-[0.75rem] uppercase tracking-widest flex items-center gap-2 shadow-s1 hover:bg-secondary/90 transition-all active:scale-[0.98]"
               >
                 <Play className="w-[15px] h-[15px] fill-current" />
                 Watch Now
               </button>
-              <button className="bg-white/10 backdrop-blur-md text-white border border-white/20 px-7 py-2.5 rounded-[2px] font-bold text-[0.75rem] uppercase tracking-widest hover:bg-white/20 transition-all">
+              <button className="bg-on-primary/10 backdrop-blur-md text-on-primary border border-on-primary/20 px-7 py-2.5 rounded-[2px] font-bold text-[0.75rem] uppercase tracking-widest hover:bg-on-primary/20 transition-all">
                 Lesson Details
               </button>
             </div>
@@ -75,10 +75,10 @@ export const MediaLibrary: React.FC<MediaLibraryProps> = ({ onPlayLesson }) => {
                 <div className="relative aspect-video rounded-lg overflow-hidden mb-3.5 shadow-s0 transition-shadow duration-350 group-hover:shadow-s2">
                   <img alt={video.title} className="w-full h-full object-cover transition-transform duration-550 group-hover:scale-105" src={video.thumbnail} />
                   <div className="absolute inset-0 bg-primary/18 group-hover:bg-transparent transition-colors duration-350"></div>
-                  <div className="absolute bottom-2.5 right-2.5 bg-primary/88 text-surface text-[0.56rem] font-bold px-2 py-0.5 rounded-[2px]">{video.duration}</div>
+                  <div className="absolute bottom-2.5 right-2.5 bg-primary/88 text-on-primary text-[0.56rem] font-bold px-2 py-0.5 rounded-[2px]">{video.duration}</div>
                   <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-280">
                     <div className="w-[52px] h-[52px] bg-secondary rounded-full flex items-center justify-center shadow-s2">
-                      <Play className="text-white w-6 h-6 fill-current ml-1" />
+                      <Play className="text-on-secondary w-6 h-6 fill-current ml-1" />
                     </div>
                   </div>
                 </div>
@@ -109,15 +109,15 @@ export const MediaLibrary: React.FC<MediaLibraryProps> = ({ onPlayLesson }) => {
                 <img alt="Prophets Featured" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" src="https://picsum.photos/seed/prophets/1200/600" />
                 <div className="absolute inset-0 bg-gradient-to-r from-primary/90 to-transparent"></div>
                 <div className="absolute inset-0 p-8 flex flex-col justify-end">
-                  <div className="bg-secondary text-white text-[0.56rem] font-bold uppercase px-2.5 py-0.5 rounded-[2px] w-max mb-3 tracking-wider">Series Spotlight</div>
-                  <h5 className="font-headline text-[1.8rem] font-bold text-white mb-2">Elijah: The Fiery Prophet</h5>
-                  <p className="text-white/75 max-w-lg text-[0.85rem] mb-4 leading-relaxed">A multi-part series exploring the life and miracles of Elijah the Prophet in the books of Kings.</p>
+                  <div className="bg-secondary text-on-secondary text-[0.56rem] font-bold uppercase px-2.5 py-0.5 rounded-[2px] w-max mb-3 tracking-wider">Series Spotlight</div>
+                  <h5 className="font-headline text-[1.8rem] font-bold text-on-primary mb-2">Elijah: The Fiery Prophet</h5>
+                  <p className="text-on-primary/75 max-w-lg text-[0.85rem] mb-4 leading-relaxed">A multi-part series exploring the life and miracles of Elijah the Prophet in the books of Kings.</p>
                   <div className="flex items-center gap-6">
-                    <div className="flex items-center text-white/90 text-[0.65rem] font-bold gap-2 uppercase tracking-wide">
+                    <div className="flex items-center text-on-primary/90 text-[0.65rem] font-bold gap-2 uppercase tracking-wide">
                       <Youtube className="w-4 h-4 text-secondary" />
                       4 Lessons
                     </div>
-                    <div className="flex items-center text-white/90 text-[0.65rem] font-bold gap-2 uppercase tracking-wide">
+                    <div className="flex items-center text-on-primary/90 text-[0.65rem] font-bold gap-2 uppercase tracking-wide">
                       <Clock className="w-4 h-4 text-secondary" />
                       3 Hours Total
                     </div>

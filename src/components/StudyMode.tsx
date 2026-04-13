@@ -10,6 +10,10 @@ interface StudyModeProps {
 }
 
 export const StudyMode: React.FC<StudyModeProps> = ({ onPlayLesson, activeLesson }) => {
+  const [analysisTab, setAnalysisTab] = React.useState<'morphology' | 'roots'>('morphology');
+  const [newNote, setNewNote] = React.useState('');
+  const [isSaving, setIsSaving] = React.useState(false);
+
   // Use active lesson context if available, otherwise default to II Kings
   const currentBook = activeLesson?.book || 'II Kings';
   const currentChapter = activeLesson?.chapter || 1;
@@ -20,6 +24,16 @@ export const StudyMode: React.FC<StudyModeProps> = ({ onPlayLesson, activeLesson
   const studyLesson = activeLesson || LESSONS[0];
   const filteredNotes = NOTES.filter(n => n.lessonId === studyLesson.id);
   const displayNotes = filteredNotes.length > 0 ? filteredNotes : NOTES.slice(0, 2);
+
+  const handleSaveNote = () => {
+    if (!newNote.trim()) return;
+    setIsSaving(true);
+    setTimeout(() => {
+      setIsSaving(false);
+      setNewNote('');
+      alert('Note saved successfully!');
+    }, 1000);
+  };
 
   return (
     <motion.div 
@@ -46,21 +60,21 @@ export const StudyMode: React.FC<StudyModeProps> = ({ onPlayLesson, activeLesson
             <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/65 to-transparent"></div>
             <div className="relative z-10 w-full text-right">
               <span className="text-secondary font-bold text-[0.56rem] uppercase tracking-[0.25em] mb-3 block">{currentBook} · Chapter {currentChapter}</span>
-              <h2 className="hebrew-text text-[2.8rem] font-bold text-white mb-6 leading-[1.4]">{activeVerse.hebrew}</h2>
+              <h2 className="hebrew-text text-[2.8rem] font-bold text-on-primary mb-6 leading-[1.4]">{activeVerse.hebrew}</h2>
               <div className="flex justify-end gap-5 text-left">
                 <div className="max-w-[32rem]">
-                  <p className="text-[1.1rem] font-body text-white/85 italic leading-relaxed">"{activeVerse.english}"</p>
+                  <p className="text-[1.1rem] font-body text-on-primary/85 italic leading-relaxed">"{activeVerse.english}"</p>
                   {activeVerse.rashi && (
-                    <div className="mt-4 p-4 bg-white/5 border-r-2 border-secondary/40 rounded-l-lg text-right">
+                    <div className="mt-4 p-4 bg-on-primary/5 border-r-2 border-secondary/40 rounded-l-lg text-right">
                       <p className="text-[0.56rem] font-bold text-secondary uppercase tracking-[0.15em] mb-1.5">רש"י · Rashi</p>
-                      <p className="hebrew-text text-[1rem] text-white/90 leading-relaxed">
+                      <p className="hebrew-text text-[1rem] text-on-primary/90 leading-relaxed">
                         {activeVerse.rashi}
                       </p>
                     </div>
                   )}
                   <div className="mt-4 flex gap-2.5">
-                    <span className="bg-white/10 text-white/70 px-2.5 py-0.5 rounded-[2px] text-[0.56rem] font-bold uppercase tracking-wider">JPS 1917</span>
-                    <span className="bg-white/10 text-white/70 px-2.5 py-0.5 rounded-[2px] text-[0.56rem] font-bold uppercase tracking-wider">{activeVerse.reference}</span>
+                    <span className="bg-on-primary/10 text-on-primary/70 px-2.5 py-0.5 rounded-[2px] text-[0.56rem] font-bold uppercase tracking-wider">JPS 1917</span>
+                    <span className="bg-on-primary/10 text-on-primary/70 px-2.5 py-0.5 rounded-[2px] text-[0.56rem] font-bold uppercase tracking-wider">{activeVerse.reference}</span>
                   </div>
                 </div>
               </div>
@@ -72,8 +86,18 @@ export const StudyMode: React.FC<StudyModeProps> = ({ onPlayLesson, activeLesson
             <div className="flex items-center justify-between border-b border-outline-variant pb-3">
               <h3 className="font-headline text-[1.25rem] font-bold text-primary">Lexical Analysis</h3>
               <div className="flex gap-1.5 bg-surface-container-low p-1 rounded-[4px]">
-                <button className="px-4 py-1 bg-primary text-white rounded-[2px] text-[0.6rem] font-bold uppercase tracking-wider shadow-sm">Morphology</button>
-                <button className="px-4 py-1 text-on-surface-variant hover:bg-surface-container-high rounded-[2px] text-[0.6rem] font-bold uppercase tracking-wider transition-colors">Roots</button>
+                <button 
+                  onClick={() => setAnalysisTab('morphology')}
+                  className={`px-4 py-1 rounded-[2px] text-[0.6rem] font-bold uppercase tracking-wider transition-all ${analysisTab === 'morphology' ? 'bg-primary text-on-primary shadow-sm' : 'text-on-surface-variant hover:bg-surface-container-high'}`}
+                >
+                  Morphology
+                </button>
+                <button 
+                  onClick={() => setAnalysisTab('roots')}
+                  className={`px-4 py-1 rounded-[2px] text-[0.6rem] font-bold uppercase tracking-wider transition-all ${analysisTab === 'roots' ? 'bg-primary text-on-primary shadow-sm' : 'text-on-surface-variant hover:bg-surface-container-high'}`}
+                >
+                  Roots
+                </button>
               </div>
             </div>
 
@@ -85,7 +109,15 @@ export const StudyMode: React.FC<StudyModeProps> = ({ onPlayLesson, activeLesson
                     <span className="text-[0.56rem] uppercase font-bold text-secondary tracking-[0.12em] block">{word.trans}</span>
                     <p className="text-[0.78rem] font-medium text-primary">{word.mean}</p>
                     <div className="pt-2 mt-2 border-t border-outline-variant/50 text-[0.65rem] text-on-surface-variant leading-relaxed">
-                      <span className="font-bold text-primary/60">Root:</span> {word.root}
+                      {analysisTab === 'morphology' ? (
+                        <>
+                          <span className="font-bold text-primary/60">Grammar:</span> {word.gram}
+                        </>
+                      ) : (
+                        <>
+                          <span className="font-bold text-primary/60">Root:</span> {word.root}
+                        </>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -103,7 +135,11 @@ export const StudyMode: React.FC<StudyModeProps> = ({ onPlayLesson, activeLesson
                     { ref: 'Malachi 3:23', text: 'Behold, I will send you Elijah the prophet before the coming of the great and terrible day of the Lord.' },
                     { ref: 'I Kings 18:46', text: 'And the hand of the Lord was on Elijah; and he girded up his loins, and ran before Ahab to the entrance of Jezreel.' },
                   ].map((item, idx) => (
-                    <div key={idx} className="p-4 bg-surface border border-outline-variant rounded-lg hover:border-secondary/30 transition-colors cursor-pointer group shadow-s0">
+                    <div 
+                      key={idx} 
+                      onClick={() => alert(`Navigating to ${item.ref}`)}
+                      className="p-4 bg-surface border border-outline-variant rounded-lg hover:border-secondary/30 transition-colors cursor-pointer group shadow-s0"
+                    >
                       <p className="text-[0.56rem] font-bold text-secondary uppercase mb-1.5 tracking-[0.1em]">{item.ref}</p>
                       <p className="text-[0.78rem] font-body italic text-on-surface-variant leading-relaxed group-hover:text-primary transition-colors">"{item.text}"</p>
                     </div>
@@ -128,12 +164,12 @@ export const StudyMode: React.FC<StudyModeProps> = ({ onPlayLesson, activeLesson
                   <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent"></div>
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="w-12 h-12 bg-secondary rounded-full flex items-center justify-center shadow-s2 group-hover:scale-110 transition-transform">
-                      <Play className="w-6 h-6 text-white fill-current ml-1" />
+                      <Play className="w-6 h-6 text-on-secondary fill-current ml-1" />
                     </div>
                   </div>
                   <div className="absolute bottom-0 left-0 right-0 p-4">
-                    <h5 className="text-white font-headline text-[0.85rem] font-bold">{studyLesson.title}</h5>
-                    <p className="text-white/60 text-[0.65rem] mt-0.5">{studyLesson.duration} · אריאל עזריה</p>
+                    <h5 className="text-on-primary font-headline text-[0.85rem] font-bold">{studyLesson.title}</h5>
+                    <p className="text-on-primary/60 text-[0.65rem] mt-0.5">{studyLesson.duration} · אריאל עזריה</p>
                   </div>
                 </div>
               </div>
@@ -162,8 +198,16 @@ export const StudyMode: React.FC<StudyModeProps> = ({ onPlayLesson, activeLesson
               <textarea 
                 className="w-full bg-transparent border-none focus:ring-0 text-[0.78rem] font-body italic placeholder:text-on-surface-variant/30 resize-none h-24" 
                 placeholder="Add a new observation..."
+                value={newNote}
+                onChange={(e) => setNewNote(e.target.value)}
               ></textarea>
-              <button className="w-full mt-3 py-2.5 bg-primary text-white text-[0.65rem] font-bold uppercase tracking-[0.12em] rounded-[2px] hover:bg-primary/90 transition-colors shadow-s1">Save Note</button>
+              <button 
+                onClick={handleSaveNote}
+                disabled={isSaving}
+                className="w-full mt-3 py-2.5 bg-primary text-on-primary text-[0.65rem] font-bold uppercase tracking-[0.12em] rounded-[2px] hover:bg-primary/90 transition-colors shadow-s1 disabled:opacity-50"
+              >
+                {isSaving ? 'Saving...' : 'Save Note'}
+              </button>
             </div>
           </div>
           

@@ -8,7 +8,7 @@ interface AccountProps {
 }
 
 export const Account: React.FC<AccountProps> = ({ onScreenChange }) => {
-  const [name, setName] = useState('Nathan Pardo');
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [location, setLocation] = useState('');
@@ -28,7 +28,7 @@ export const Account: React.FC<AccountProps> = ({ onScreenChange }) => {
     if (confirm('Are you sure you want to sign out?')) {
       console.log('Signing out...');
       showToast('Signed out successfully!');
-      // In a real app, you'd clear auth state here
+      onScreenChange('signup');
     }
   };
 
@@ -64,12 +64,12 @@ export const Account: React.FC<AccountProps> = ({ onScreenChange }) => {
       {/* Toast Notification */}
       <AnimatePresence>
         {toast && (
-          <motion.div
-            initial={{ opacity: 0, y: 50, x: '-50%' }}
-            animate={{ opacity: 1, y: 0, x: '-50%' }}
-            exit={{ opacity: 0, y: 20, x: '-50%' }}
-            className="fixed bottom-32 left-1/2 z-[100] bg-primary text-white px-6 py-3 rounded-full shadow-s3 text-[0.8rem] font-bold flex items-center gap-3"
-          >
+            <motion.div
+              initial={{ opacity: 0, y: 50, x: '-50%' }}
+              animate={{ opacity: 1, y: 0, x: '-50%' }}
+              exit={{ opacity: 0, y: 20, x: '-50%' }}
+              className="fixed bottom-32 left-1/2 z-[100] bg-primary text-on-primary px-6 py-3 rounded-full shadow-s3 text-[0.8rem] font-bold flex items-center gap-3"
+            >
             <div className="w-2 h-2 rounded-full bg-secondary animate-pulse" />
             {toast}
           </motion.div>
@@ -90,7 +90,7 @@ export const Account: React.FC<AccountProps> = ({ onScreenChange }) => {
               </div>
               <button 
                 onClick={handleUploadPhoto}
-                className="absolute bottom-0 right-0 w-9 h-9 bg-primary text-white rounded-full flex items-center justify-center shadow-s1 hover:bg-primary/90 transition-colors"
+                className="absolute bottom-0 right-0 w-9 h-9 bg-primary text-on-primary rounded-full flex items-center justify-center shadow-s1 hover:bg-primary/90 transition-colors"
               >
                 <Camera className="w-4 h-4" />
               </button>
@@ -114,10 +114,18 @@ export const Account: React.FC<AccountProps> = ({ onScreenChange }) => {
 
           {/* Account Details */}
           <section className="bg-surface border border-outline-variant rounded-lg p-8 shadow-s0">
-            <h4 className="font-headline text-[1.1rem] font-bold text-primary mb-6 flex items-center gap-2.5">
-              <Shield className="w-5 h-5 text-secondary" />
-              Personal Information
-            </h4>
+            <div className="flex justify-between items-center mb-6">
+              <h4 className="font-headline text-[1.1rem] font-bold text-primary flex items-center gap-2.5">
+                <Shield className="w-5 h-5 text-secondary" />
+                Personal Information
+              </h4>
+              <button 
+                onClick={() => onScreenChange('signup')}
+                className="text-[0.65rem] font-bold text-secondary uppercase tracking-widest hover:underline"
+              >
+                Create New Account
+              </button>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="text-[0.65rem] font-bold text-secondary uppercase tracking-wider block mb-1.5">Full Name</label>
@@ -162,7 +170,7 @@ export const Account: React.FC<AccountProps> = ({ onScreenChange }) => {
             <div className="mt-8 flex justify-end">
               <button 
                 onClick={handleUpdate}
-                className="px-6 py-2 bg-primary text-white text-[0.7rem] font-bold uppercase tracking-widest rounded-[2px] shadow-s1 hover:bg-primary/90 transition-colors"
+                className="px-6 py-2 bg-primary text-on-primary text-[0.7rem] font-bold uppercase tracking-widest rounded-[2px] shadow-s1 hover:bg-primary/90 transition-colors"
               >
                 Update Profile
               </button>

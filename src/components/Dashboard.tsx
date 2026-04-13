@@ -19,7 +19,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onPlayLesson }) => {
       {/* Hero Header */}
       <section className="flex justify-between items-end border-b border-outline-variant pb-6">
         <div>
-          <h2 className="font-headline text-[2rem] font-bold text-primary mb-1">Shalom, Nathan</h2>
+          <h2 className="font-headline text-[2rem] font-bold text-primary mb-1">Shalom</h2>
           <p className="text-on-surface-variant text-sm font-medium">Continue your journey through the sacred scrolls today.</p>
         </div>
         <div className="text-right">
@@ -38,7 +38,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onPlayLesson }) => {
             </div>
             <div className="relative z-10 space-y-6">
               <div className="flex justify-between items-center">
-                <span className="bg-secondary text-white text-[0.55rem] font-bold uppercase tracking-[0.14em] px-2.5 py-0.5 rounded-[2px]">Daily Verse</span>
+                <span className="bg-secondary text-on-secondary text-[0.55rem] font-bold uppercase tracking-[0.14em] px-2.5 py-0.5 rounded-[2px]">Daily Verse</span>
                 <span className="font-headline text-[0.95rem] font-bold text-primary">II Kings 1:8</span>
               </div>
               <div className="space-y-4">
@@ -66,16 +66,16 @@ export const Dashboard: React.FC<DashboardProps> = ({ onPlayLesson }) => {
         {/* Side Bento Column */}
         <div className="col-span-12 lg:col-span-4 flex flex-col gap-4">
           {/* Study Streak */}
-          <div className="bg-primary rounded-lg p-6 flex flex-col justify-between min-h-[10rem] relative overflow-hidden shadow-s1 text-surface">
+          <div className="bg-primary rounded-lg p-6 flex flex-col justify-between min-h-[10rem] relative overflow-hidden shadow-s1 text-on-primary">
             <div className="absolute top-0 right-0 p-4 opacity-[0.07]">
               <Flame size={64} />
             </div>
             <div className="flex justify-between items-center relative z-10">
-              <span className="text-[0.56rem] font-bold uppercase tracking-[0.14em] text-surface/50">Study Streak</span>
+              <span className="text-[0.56rem] font-bold uppercase tracking-[0.14em] text-on-primary/50">Study Streak</span>
               <Flame className="w-[18px] h-[18px] text-secondary fill-secondary" />
             </div>
             <h3 className="font-headline text-[2.6rem] font-bold relative z-10 leading-[1.1]">14 <span className="text-[0.95rem] font-body font-normal opacity-40">Days</span></h3>
-            <p className="text-[0.64rem] text-surface/46 relative z-10">Keep it up! Longest: 22 days.</p>
+            <p className="text-[0.64rem] text-on-primary/46 relative z-10">Keep it up! Longest: 22 days.</p>
           </div>
 
           {/* Shiurim Progress */}
@@ -114,10 +114,10 @@ export const Dashboard: React.FC<DashboardProps> = ({ onPlayLesson }) => {
               <div className="relative aspect-video rounded-lg overflow-hidden mb-3.5 shadow-s0 transition-shadow duration-350 group-hover:shadow-s2">
                 <img alt={lesson.title} className="w-full h-full object-cover transition-transform duration-550 group-hover:scale-105" src={lesson.thumbnail} />
                 <div className="absolute inset-0 bg-primary/18 group-hover:bg-transparent transition-colors duration-350"></div>
-                <div className="absolute bottom-2.5 right-2.5 bg-primary/88 text-surface text-[0.56rem] font-bold px-2 py-0.5 rounded-[2px]">{lesson.duration}</div>
+                <div className="absolute bottom-2.5 right-2.5 bg-primary/88 text-on-primary text-[0.56rem] font-bold px-2 py-0.5 rounded-[2px]">{lesson.duration}</div>
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-280">
                   <div className="w-[52px] h-[52px] bg-secondary rounded-full flex items-center justify-center shadow-s2">
-                    <Play className="text-white w-6 h-6 fill-current ml-1" />
+                    <Play className="text-on-secondary w-6 h-6 fill-current ml-1" />
                   </div>
                 </div>
               </div>
@@ -151,7 +151,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onPlayLesson }) => {
               onClick={() => item.lesson && onPlayLesson(item.lesson)}
               className="bg-surface-container-low hover:bg-surface-container-high p-4 rounded-lg border border-outline-variant/10 hover:border-secondary/26 transition-all flex items-center gap-3.5 group/item text-left"
             >
-              <div className="w-[38px] h-[38px] bg-primary/7 rounded flex items-center justify-center text-primary group-hover/item:bg-secondary group-hover/item:text-surface transition-colors">
+              <div className="w-[38px] h-[38px] bg-primary/7 rounded flex items-center justify-center text-primary group-hover/item:bg-secondary group-hover/item:text-on-secondary transition-colors">
                 <item.icon className="w-[17px] h-[17px]" />
               </div>
               <div>

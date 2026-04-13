@@ -1,8 +1,13 @@
 import React from 'react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { Settings as SettingsIcon, Bell, Shield, Globe, Moon, Volume2 } from 'lucide-react';
 
-export const Settings: React.FC = () => {
+interface SettingsProps {
+  darkMode: boolean;
+  onToggleDarkMode: () => void;
+}
+
+export const Settings: React.FC<SettingsProps> = ({ darkMode, onToggleDarkMode }) => {
   return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
@@ -77,8 +82,15 @@ export const Settings: React.FC = () => {
                   <p className="text-[0.85rem] font-bold text-primary">Dark Mode</p>
                   <p className="text-[0.7rem] text-on-surface-variant">Switch to a darker color palette for night study.</p>
                 </div>
-                <div className="w-10 h-5 bg-surface-container-high rounded-full relative cursor-pointer">
-                  <div className="absolute left-0.5 top-0.5 w-4 h-4 bg-white rounded-full shadow-sm"></div>
+                <div 
+                  onClick={onToggleDarkMode}
+                  className={`w-10 h-5 rounded-full relative cursor-pointer transition-colors ${darkMode ? 'bg-secondary/20' : 'bg-surface-container-high'}`}
+                >
+                  <motion.div 
+                    animate={{ x: darkMode ? 20 : 2 }}
+                    initial={false}
+                    className={`absolute top-0.5 w-4 h-4 rounded-full shadow-sm ${darkMode ? 'bg-secondary' : 'bg-white'}`}
+                  />
                 </div>
               </div>
               <div className="flex items-center justify-between">

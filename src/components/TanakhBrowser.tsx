@@ -57,7 +57,7 @@ export const TanakhBrowser: React.FC<TanakhBrowserProps> = ({ onPlayLesson, acti
                 onClick={() => setSelectedChapter(chapterNum)}
                 className={`w-9 h-9 rounded-full flex items-center justify-center font-headline text-[0.9rem] font-bold transition-all border ${
                   isActive 
-                    ? 'bg-secondary text-white border-secondary shadow-[0_2px_8px_rgba(119,90,25,0.26)]' 
+                    ? 'bg-secondary text-on-secondary border-secondary shadow-[0_2px_8px_rgba(119,90,25,0.26)]' 
                     : 'border-outline-variant text-primary/45 hover:border-secondary hover:text-secondary'
                 }`}
               >
@@ -76,7 +76,7 @@ export const TanakhBrowser: React.FC<TanakhBrowserProps> = ({ onPlayLesson, acti
               }`}
             >
               {verse.number === 8 && (
-                <div className="absolute -right-1.5 top-6 bg-secondary text-white text-[0.5rem] font-bold uppercase tracking-[0.1em] px-2.5 py-0.5 rounded-r-full shadow-sm">
+                <div className="absolute -right-1.5 top-6 bg-secondary text-on-secondary text-[0.5rem] font-bold uppercase tracking-[0.1em] px-2.5 py-0.5 rounded-r-full shadow-sm">
                   Active
                 </div>
               )}

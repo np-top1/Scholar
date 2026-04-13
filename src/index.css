@@ -16,6 +16,10 @@
   --color-surface-container: #f1eee7;
   --color-surface-container-high: #ebe8e1;
   --color-surface-container-highest: #e5e2db;
+  
+  --color-on-primary: #ffffff;
+  --color-on-secondary: #ffffff;
+  --color-on-surface: #002045;
 
   --color-on-surface-variant: #43474e;
   --color-outline-variant: rgba(196, 198, 207, 0.32);
@@ -26,9 +30,34 @@
   --shadow-s3: 0 20px 60px rgba(0, 32, 69, 0.25);
 }
 
+.dark {
+  --color-primary: #aac7ff;
+  --color-primary-variant: #004a77;
+  --color-secondary: #eec16d;
+  --color-secondary-variant: #5d4201;
+  
+  --color-surface: #111318;
+  --color-surface-container-low: #1a1c22;
+  --color-surface-container: #1e2027;
+  --color-surface-container-high: #282a31;
+  --color-surface-container-highest: #33353c;
+
+  --color-on-primary: #002f4f;
+  --color-on-secondary: #422c00;
+  --color-on-surface: #e2e2e6;
+
+  --color-on-surface-variant: #c4c6cf;
+  --color-outline-variant: rgba(196, 198, 207, 0.12);
+
+  --shadow-s0: 0 1px 4px rgba(0, 0, 0, 0.3);
+  --shadow-s1: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-s2: 0 12px 36px rgba(0, 0, 0, 0.5);
+  --shadow-s3: 0 20px 60px rgba(0, 0, 0, 0.6);
+}
+
 @layer base {
   body {
-    @apply bg-surface text-primary font-body antialiased;
+    @apply bg-surface text-on-surface font-body antialiased;
   }
 
   .hebrew-text {

@@ -55,8 +55,13 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentScreen, onScreenChange 
 
       <div className="px-5 pt-4.5 border-t border-outline-variant mt-auto">
         <div className="flex items-center gap-2.5 mb-3.5">
-          <div className="w-9 h-9 rounded-full bg-primary/5 border border-secondary/20 flex items-center justify-center shrink-0">
-            <GraduationCap className="w-4 h-4 text-secondary" />
+          <div className="w-9 h-9 rounded-full bg-primary/5 border border-secondary/20 flex items-center justify-center shrink-0 overflow-hidden">
+            <img 
+              src="https://storage.googleapis.com/multimodal-toolkit-public-assets/input_file_0.png" 
+              alt="אריאל עזריה"
+              className="w-full h-full object-cover"
+              referrerPolicy="no-referrer"
+            />
           </div>
           <div>
             <p className="text-[0.8rem] font-bold text-primary font-headline">אריאל עזריה</p>

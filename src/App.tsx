@@ -11,7 +11,6 @@ import { Support } from './components/Support';
 import { Account } from './components/Account';
 import { Signup } from './components/Signup';
 import { Chat } from './components/Chat';
-import Analytics from './components/Analytics';
 import { Screen, Lesson } from './types';
 import { LESSONS } from './constants';
 
@@ -54,7 +53,6 @@ export default function App() {
 
   return (
     <div className="flex h-screen overflow-hidden">
-      <Analytics />
       <Sidebar currentScreen={currentScreen} onScreenChange={setCurrentScreen} />
       <div className="flex-1 flex flex-col overflow-hidden min-w-0">
         <TopBar onScreenChange={setCurrentScreen} />

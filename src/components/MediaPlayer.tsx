@@ -12,28 +12,55 @@ import {
   Youtube
 } from 'lucide-react';
 import { Lesson } from '../types';
+import { LESSONS } from '../constants';
 
 interface MediaPlayerProps {
   activeLesson: Lesson | null;
+  onPlayLesson: (lesson: Lesson) => void;
 }
 
-export const MediaPlayer: React.FC<MediaPlayerProps> = ({ activeLesson }) => {
+export const MediaPlayer: React.FC<MediaPlayerProps> = ({ activeLesson, onPlayLesson }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [imgError, setImgError] = useState(false);
 
   // Auto-play when a new lesson is selected
   useEffect(() => {
     if (activeLesson) {
       setIsPlaying(true);
+      setImgError(false);
     }
   }, [activeLesson]);
 
   if (!activeLesson) return null;
 
+  const currentIndex = LESSONS.findIndex(l => l.id === activeLesson.id);
+
+  const handleSkipBack = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (currentIndex > 0) {
+      onPlayLesson(LESSONS[currentIndex - 1]);
+    }
+  };
+
+  const handleSkipForward = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (currentIndex < LESSONS.length - 1) {
+      onPlayLesson(LESSONS[currentIndex + 1]);
+    }
+  };
+
   const togglePlay = (e: React.MouseEvent) => {
     e.stopPropagation();
     setIsPlaying(!isPlaying);
   };
+
+  // Thumbnail with hqdefault fallback
+  const thumbnailSrc = imgError
+    ? activeLesson.youtubeId
+      ? `https://img.youtube.com/vi/${activeLesson.youtubeId}/hqdefault.jpg`
+      : null
+    : activeLesson.thumbnail;
 
   return (
     <footer className={`fixed bottom-0 right-0 w-full lg:w-[calc(100%-16rem)] z-50 bg-primary text-on-primary shadow-s3 transition-all duration-500 rounded-t-xl lg:rounded-t-none lg:rounded-tl-xl ${isExpanded ? 'h-[85vh]' : 'h-[4.5rem]'}`}>
@@ -93,8 +120,13 @@ export const MediaPlayer: React.FC<MediaPlayerProps> = ({ activeLesson }) => {
         <div className="flex items-center gap-4 min-w-[14rem]">
           <div className="relative group cursor-pointer" onClick={() => setIsExpanded(!isExpanded)}>
             <div className="w-11 h-11 bg-white/10 rounded-[4px] flex items-center justify-center border border-white/10 overflow-hidden">
-              {activeLesson.thumbnail ? (
-                <img src={activeLesson.thumbnail} alt={activeLesson.title} className="w-full h-full object-cover" />
+              {thumbnailSrc ? (
+                <img
+                  src={thumbnailSrc}
+                  alt={activeLesson.title}
+                  className="w-full h-full object-cover"
+                  onError={() => setImgError(true)}
+                />
               ) : (
                 <Youtube className="text-secondary w-5 h-5" />
               )}
@@ -110,7 +142,11 @@ export const MediaPlayer: React.FC<MediaPlayerProps> = ({ activeLesson }) => {
         </div>
 
         <div className="flex items-center gap-6 lg:gap-10">
-          <button className="text-on-primary/60 hover:text-secondary transition-colors">
+          <button
+            onClick={handleSkipBack}
+            disabled={currentIndex <= 0}
+            className="text-on-primary/60 hover:text-secondary transition-colors disabled:opacity-25 disabled:cursor-not-allowed"
+          >
             <SkipBack className="w-5 h-5" />
           </button>
           <button 
@@ -119,12 +155,16 @@ export const MediaPlayer: React.FC<MediaPlayerProps> = ({ activeLesson }) => {
           >
             {isPlaying ? <Pause className="w-9 h-9 fill-current" /> : <Play className="w-9 h-9 fill-current" />}
           </button>
-          <button className="text-on-primary/60 hover:text-secondary transition-colors">
+          <button
+            onClick={handleSkipForward}
+            disabled={currentIndex >= LESSONS.length - 1}
+            className="text-on-primary/60 hover:text-secondary transition-colors disabled:opacity-25 disabled:cursor-not-allowed"
+          >
             <SkipForward className="w-5 h-5" />
           </button>
         </div>
 
-          <div className="hidden md:flex items-center gap-6 min-w-[14rem] justify-end">
+        <div className="hidden md:flex items-center gap-6 min-w-[14rem] justify-end">
           <div className="flex items-center gap-3">
             <Volume2 className="w-4 h-4 text-on-primary/40" />
             <div className="w-20 h-[3px] bg-on-primary/15 rounded-full overflow-hidden">

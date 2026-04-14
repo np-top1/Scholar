@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { HelpCircle, MessageSquare, Mail, Book, ExternalLink, Search, ChevronRight } from 'lucide-react';
 
 export const Support: React.FC = () => {

@@ -1,0 +1,131 @@
+import React, { useEffect, useRef } from 'react';
+import { Play, BookOpen } from 'lucide-react';
+import { VERSES, LESSONS } from '../constants';
+import { motion } from 'framer-motion';
+import { Lesson } from '../types';
+
+interface TanakhBrowserProps {
+  onPlayLesson: (lesson: Lesson) => void;
+  activeLesson: Lesson | null;
+  highlightVerseId?: string | null;
+  highlightChapter?: number | null;
+}
+
+export const TanakhBrowser: React.FC<TanakhBrowserProps> = ({
+  onPlayLesson,
+  activeLesson,
+  highlightVerseId,
+  highlightChapter,
+}) => {
+  const [selectedChapter, setSelectedChapter] = React.useState<number | null>(null);
+  const verseRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const chapters = ['א', 'ב', 'ג', 'ד', 'ה', 'ו', 'ז', 'ח', 'ט', 'י'];
+
+  // When a search result sets a chapter, override selectedChapter
+  useEffect(() => {
+    if (highlightChapter) {
+      setSelectedChapter(highlightChapter);
+    }
+  }, [highlightChapter, highlightVerseId]);
+
+  // Scroll to highlighted verse after render
+  useEffect(() => {
+    if (highlightVerseId && verseRefs.current[highlightVerseId]) {
+      setTimeout(() => {
+        verseRefs.current[highlightVerseId]?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 150);
+    }
+  }, [highlightVerseId, selectedChapter]);
+
+  const currentBook = activeLesson?.book || 'II Kings';
+  const currentChapter = selectedChapter || highlightChapter || activeLesson?.chapter || 1;
+  const currentHebrewName = 'מְלָכִים ב';
+
+  const filteredVerses = VERSES.filter(v => v.book === currentBook && v.chapter === currentChapter);
+  const displayVerses = filteredVerses.length > 0 ? filteredVerses : VERSES;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="py-6 px-7 max-w-[54rem] mx-auto pb-32"
+    >
+      <div className="mb-6">
+        <h2 className="font-headline text-[1.65rem] font-bold text-primary mb-1">Tanakh Browser</h2>
+        <p className="text-[0.78rem] text-on-surface-variant">Read the Hebrew text with English translation. Click a verse to highlight it, then watch the related shiur.</p>
+      </div>
+
+      <div className="bg-surface border border-outline-variant rounded-lg p-7 shadow-s0">
+        <h3 className="font-headline text-[1.3rem] font-bold text-primary flex justify-between items-center mb-2">
+          <span className="hebrew-text">{currentHebrewName}</span>
+          <span className="text-[0.62rem] font-bold text-secondary uppercase tracking-[0.2em]">{currentBook} · Chapter {currentChapter}</span>
+        </h3>
+
+        <div className="flex gap-2 mb-6 flex-wrap">
+          {chapters.map((ch, idx) => {
+            const chapterNum = idx + 1;
+            const isActive = currentChapter === chapterNum;
+            return (
+              <button
+                key={idx}
+                onClick={() => setSelectedChapter(chapterNum)}
+                className={`w-9 h-9 rounded-full flex items-center justify-center font-headline text-[0.9rem] font-bold transition-all border ${
+                  isActive
+                    ? 'bg-secondary text-on-secondary border-secondary shadow-[0_2px_8px_rgba(119,90,25,0.26)]'
+                    : 'border-outline-variant text-primary/45 hover:border-secondary hover:text-secondary'
+                }`}
+              >
+                {ch}
+              </button>
+            );
+          })}
+        </div>
+
+        <div className="space-y-11">
+          {displayVerses.map((verse) => {
+            const isHighlighted = verse.id === highlightVerseId;
+            const isActive = verse.number === 8 && !highlightVerseId;
+            const showHighlight = isHighlighted || isActive;
+
+            return (
+              <div
+                key={verse.id}
+                ref={el => { verseRefs.current[verse.id] = el; }}
+                className={`group cursor-pointer transition-all duration-300 border-r-3 border-transparent pr-3.5 rounded-lg ${
+                  isHighlighted
+                    ? 'bg-secondary/8 border-r-4 border-secondary p-5 relative ring-1 ring-secondary/20'
+                    : isActive
+                    ? 'bg-surface-container-low/70 rounded-lg p-5 border-r-4 border-secondary relative'
+                    : 'hover:border-secondary/25'
+                }`}
+              >
+                {showHighlight && (
+                  <div className="absolute -right-1.5 top-6 bg-secondary text-on-secondary text-[0.5rem] font-bold uppercase tracking-[0.1em] px-2.5 py-0.5 rounded-r-full shadow-sm">
+                    {isHighlighted ? 'Match' : 'Active'}
+                  </div>
+                )}
+                <div className={`text-[0.62rem] font-bold mb-1.5 text-right ${showHighlight ? 'text-secondary' : 'text-secondary/36'}`}>
+                  {verse.number}
+                </div>
+                <p className="hebrew-text text-[1.5rem] text-primary leading-[1.75] text-right">
+                  {verse.hebrew}
+                </p>
+                <p className={`mt-2 text-[0.85rem] font-body text-on-surface-variant leading-relaxed italic ${showHighlight ? '' : 'border-r-2 border-secondary/10 pr-3'}`}>
+                  {verse.english}
+                </p>
+                {verse.rashi && (
+                  <div className="mt-4 p-4 bg-surface-container-low/40 border-r-2 border-secondary/20 rounded-l-lg">
+                    <p className="text-[0.65rem] font-bold text-secondary uppercase tracking-[0.15em] mb-1.5">רש"י · Rashi</p>
+                    <p className="hebrew-text text-[1.1rem] text-primary/80 leading-relaxed text-right">
+                      {verse.rashi}
+                    </p>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </motion.div>
+  );
+};

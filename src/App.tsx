@@ -59,7 +59,7 @@ export default function App() {
         <div className="flex-1 overflow-y-auto overflow-x-hidden" id="scroll">
           {renderScreen()}
         </div>
-        <MediaPlayer activeLesson={activeLesson} />
+        <MediaPlayer activeLesson={activeLesson} onPlayLesson={setActiveLesson} />
         <Chat activeLesson={activeLesson} currentScreen={currentScreen} />
       </div>
     </div>

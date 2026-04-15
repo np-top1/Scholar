@@ -1,35 +1,18 @@
 import React from 'react';
-import { FileEdit, Lightbulb, Play, BookOpen, Trash2 } from 'lucide-react';
+import { FileEdit, Lightbulb, Play, BookOpen, Search } from 'lucide-react';
 import { NOTES, LESSONS, VERSES, WORDS } from '../constants';
 import { motion } from 'framer-motion';
-import { Lesson, Note } from '../types';
+import { Lesson } from '../types';
 
 interface StudyModeProps {
   onPlayLesson: (lesson: Lesson) => void;
   activeLesson: Lesson | null;
 }
 
-const STORAGE_KEY = 'scholar_notes';
-
-function loadNotes(): Note[] {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? JSON.parse(raw) : [];
-  } catch {
-    return [];
-  }
-}
-
-function saveNotes(notes: Note[]): void {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(notes));
-}
-
 export const StudyMode: React.FC<StudyModeProps> = ({ onPlayLesson, activeLesson }) => {
   const [analysisTab, setAnalysisTab] = React.useState<'morphology' | 'roots'>('morphology');
   const [newNote, setNewNote] = React.useState('');
   const [isSaving, setIsSaving] = React.useState(false);
-  const [savedToast, setSavedToast] = React.useState(false);
-  const [userNotes, setUserNotes] = React.useState<Note[]>(loadNotes);
 
   // Use active lesson context if available, otherwise default to II Kings
   const currentBook = activeLesson?.book || 'II Kings';
@@ -39,42 +22,17 @@ export const StudyMode: React.FC<StudyModeProps> = ({ onPlayLesson, activeLesson
   const activeVerse = filteredVerses[0] || VERSES[0];
 
   const studyLesson = activeLesson || LESSONS[0];
-
-  // Combine built-in notes with user notes for this lesson
-  const builtInNotes = NOTES.filter(n => n.lessonId === studyLesson.id);
-  const lessonUserNotes = userNotes.filter(n => n.lessonId === studyLesson.id);
-  const displayNotes = [
-    ...(builtInNotes.length > 0 ? builtInNotes : NOTES.slice(0, 2)),
-    ...lessonUserNotes,
-  ];
+  const filteredNotes = NOTES.filter(n => n.lessonId === studyLesson.id);
+  const displayNotes = filteredNotes.length > 0 ? filteredNotes : NOTES.slice(0, 2);
 
   const handleSaveNote = () => {
     if (!newNote.trim()) return;
     setIsSaving(true);
-
-    const note: Note = {
-      id: `user-note-${Date.now()}`,
-      concept: 'My Note',
-      content: newNote.trim(),
-      lessonId: studyLesson.id,
-    };
-
-    const updated = [...userNotes, note];
-    setUserNotes(updated);
-    saveNotes(updated);
-
     setTimeout(() => {
       setIsSaving(false);
       setNewNote('');
-      setSavedToast(true);
-      setTimeout(() => setSavedToast(false), 2500);
-    }, 400);
-  };
-
-  const handleDeleteNote = (id: string) => {
-    const updated = userNotes.filter(n => n.id !== id);
-    setUserNotes(updated);
-    saveNotes(updated);
+      alert('Note saved successfully!');
+    }, 1000);
   };
 
   return (
@@ -227,33 +185,16 @@ export const StudyMode: React.FC<StudyModeProps> = ({ onPlayLesson, activeLesson
               <FileEdit className="text-primary/25 w-[18px] h-[18px]" />
             </div>
             <div className="flex-1 space-y-5 overflow-y-auto pr-1 custom-scrollbar">
-              {displayNotes.map((note) => {
-                const isUserNote = note.id.startsWith('user-note-');
-                return (
-                  <div key={note.id} className="p-3.5 bg-surface-container-low/50 rounded-lg border border-outline-variant/40 hover:border-secondary/25 transition-colors group relative">
-                    <span className="text-[0.56rem] font-bold text-secondary uppercase tracking-[0.12em] block mb-1.5">
-                      {note.timestamp ? `Timestamp: ${note.timestamp}` : note.concept}
-                    </span>
-                    <p className="text-[0.78rem] italic leading-relaxed text-on-surface-variant">{note.content}</p>
-                    {isUserNote && (
-                      <button
-                        onClick={() => handleDeleteNote(note.id)}
-                        className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity text-on-surface-variant/40 hover:text-red-400"
-                        title="Delete note"
-                      >
-                        <Trash2 className="w-3.5 h-3.5" />
-                      </button>
-                    )}
-                  </div>
-                );
-              })}
+              {displayNotes.map((note) => (
+                <div key={note.id} className="p-3.5 bg-surface-container-low/50 rounded-lg border border-outline-variant/40 hover:border-secondary/25 transition-colors">
+                  <span className="text-[0.56rem] font-bold text-secondary uppercase tracking-[0.12em] block mb-1.5">
+                    {note.timestamp ? `Timestamp: ${note.timestamp}` : note.concept}
+                  </span>
+                  <p className="text-[0.78rem] italic leading-relaxed text-on-surface-variant">{note.content}</p>
+                </div>
+              ))}
             </div>
             <div className="mt-6 pt-5 border-t border-outline-variant">
-              {savedToast && (
-                <p className="text-[0.65rem] font-bold text-secondary uppercase tracking-wider mb-2 text-center animate-pulse">
-                  ✓ Note saved
-                </p>
-              )}
               <textarea 
                 className="w-full bg-transparent border-none focus:ring-0 text-[0.78rem] font-body italic placeholder:text-on-surface-variant/30 resize-none h-24" 
                 placeholder="Add a new observation..."
@@ -262,7 +203,7 @@ export const StudyMode: React.FC<StudyModeProps> = ({ onPlayLesson, activeLesson
               ></textarea>
               <button 
                 onClick={handleSaveNote}
-                disabled={isSaving || !newNote.trim()}
+                disabled={isSaving}
                 className="w-full mt-3 py-2.5 bg-primary text-on-primary text-[0.65rem] font-bold uppercase tracking-[0.12em] rounded-[2px] hover:bg-primary/90 transition-colors shadow-s1 disabled:opacity-50"
               >
                 {isSaving ? 'Saving...' : 'Save Note'}

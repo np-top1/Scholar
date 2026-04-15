@@ -11,17 +11,13 @@ import { Support } from './components/Support';
 import { Account } from './components/Account';
 import { Signup } from './components/Signup';
 import { Chat } from './components/Chat';
-import { Screen, Lesson, Verse } from './types';
+import { Screen, Lesson } from './types';
 import { LESSONS } from './constants';
 
 export default function App() {
   const [currentScreen, setCurrentScreen] = useState<Screen>('dashboard');
   const [activeLesson, setActiveLesson] = useState<Lesson | null>(LESSONS[0]);
   const [darkMode, setDarkMode] = useState(false);
-
-  // Search state — passed down to TanakhBrowser
-  const [highlightVerseId, setHighlightVerseId] = useState<string | null>(null);
-  const [highlightChapter, setHighlightChapter] = useState<number | null>(null);
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
@@ -32,29 +28,12 @@ export default function App() {
     }
   };
 
-  const handleVerseSelect = (verse: Verse) => {
-    setHighlightVerseId(verse.id);
-    setHighlightChapter(verse.chapter);
-    setCurrentScreen('browser');
-  };
-
-  const handleLessonSelect = (lesson: Lesson) => {
-    setActiveLesson(lesson);
-  };
-
   const renderScreen = () => {
     switch (currentScreen) {
       case 'dashboard':
         return <Dashboard onPlayLesson={setActiveLesson} activeLesson={activeLesson} />;
       case 'browser':
-        return (
-          <TanakhBrowser
-            onPlayLesson={setActiveLesson}
-            activeLesson={activeLesson}
-            highlightVerseId={highlightVerseId}
-            highlightChapter={highlightChapter}
-          />
-        );
+        return <TanakhBrowser onPlayLesson={setActiveLesson} activeLesson={activeLesson} />;
       case 'study':
         return <StudyMode onPlayLesson={setActiveLesson} activeLesson={activeLesson} />;
       case 'media':
@@ -76,15 +55,11 @@ export default function App() {
     <div className="flex h-screen overflow-hidden">
       <Sidebar currentScreen={currentScreen} onScreenChange={setCurrentScreen} />
       <div className="flex-1 flex flex-col overflow-hidden min-w-0">
-        <TopBar
-          onScreenChange={setCurrentScreen}
-          onVerseSelect={handleVerseSelect}
-          onLessonSelect={handleLessonSelect}
-        />
+        <TopBar onScreenChange={setCurrentScreen} />
         <div className="flex-1 overflow-y-auto overflow-x-hidden" id="scroll">
           {renderScreen()}
         </div>
-        <MediaPlayer activeLesson={activeLesson} onPlayLesson={setActiveLesson} />
+        <MediaPlayer activeLesson={activeLesson} />
         <Chat activeLesson={activeLesson} currentScreen={currentScreen} />
       </div>
     </div>

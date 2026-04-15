@@ -153,6 +153,15 @@ export const LESSONS: Lesson[] = [
     thumbnail: 'https://img.youtube.com/vi/fkdby9nGq9Q/maxresdefault.jpg',
     author: 'Rabbi Ariel Azaria',
     youtubeId: 'fkdby9nGq9Q'
+  },
+  {
+    id: 'lesson-5',
+    title: 'New Video Lesson',
+    description: 'A new video lesson added to the scholarly library.',
+    duration: '15:00',
+    thumbnail: 'https://img.youtube.com/vi/-PJH__CKaqA/maxresdefault.jpg',
+    author: 'Rabbi Ariel Azaria',
+    youtubeId: '-PJH__CKaqA'
   }
 ];
 
